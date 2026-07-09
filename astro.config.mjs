@@ -44,6 +44,8 @@ export default defineConfig({
 				}),
 			],
 			sidebar: [
+				// Cross-link back to the marketing site (nexisdev.org).
+				{ label: '← Back to nexisdev.org', link: 'https://nexisdev.org' },
 				{
 					label: 'Basics',
 					items: [
