@@ -1,0 +1,64 @@
+---
+title: Nexis — AI-native terminal & dev environment
+description: Documentation for Nexis — the open-source, AI-native terminal and developer environment.
+template: splash
+hero:
+  tagline: The open-source, AI-native terminal & developer environment. Native PTY, a full editor, LSP/DAP, source control, and an AI panel on your own keys — or fully offline. Under 10 MB, zero telemetry.
+  image:
+    file: ../../assets/nexis-logo.png
+  actions:
+    - text: Get started
+      link: /basics/what-is-nexis/
+      icon: right-arrow
+      variant: primary
+    - text: Install Nexis
+      link: /installation/
+      icon: download
+    - text: View on GitHub
+      link: https://github.com/rwetz/Nexis
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## Welcome
+
+This is the documentation home for the **Nexis ecosystem** — the Nexis terminal
+app and its two ML engines. Pick a starting point below, or use the search box
+(<kbd>/</kbd>) to jump straight to a topic.
+
+<CardGrid stagger>
+	<Card title="New here?" icon="rocket">
+		Start with [What is Nexis?](/basics/what-is-nexis/) for the tour, then
+		[Quick start](/basics/quick-start/) to get running in a few minutes.
+	</Card>
+	<Card title="Install" icon="download">
+		Grab a build for [Linux](/installation/linux/),
+		[macOS](/installation/macos/), or [Windows & WSL](/installation/windows/).
+	</Card>
+	<Card title="Explore features" icon="puzzle">
+		The [terminal](/features/terminal/), [editor](/features/editor/),
+		[AI panel](/features/ai-panel/), [language tooling](/features/language-tooling/),
+		and [git](/features/git/).
+	</Card>
+	<Card title="Configure it" icon="setting">
+		[Settings](/configuration/settings/), [keyboard shortcuts](/configuration/keybindings/),
+		[themes](/configuration/themes/), and [AI providers](/configuration/ai-providers/).
+	</Card>
+</CardGrid>
+
+## The ecosystem
+
+<CardGrid>
+	<LinkCard
+		title="Nexis"
+		href="/basics/what-is-nexis/"
+		description="The AI-native terminal & developer environment. Tauri 2 · Rust · React 19."
+	/>
+	<LinkCard
+		title="ML Suite"
+		href="/ml-suite/"
+		description="Train small models on your own data from the ML Lab panel — a Python engine or a single-binary Rust engine."
+	/>
+</CardGrid>

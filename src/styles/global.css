@@ -1,0 +1,90 @@
+/* ------------------------------------------------------------------ */
+/*  Nexis wiki — global styles                                         */
+/*  Self-hosted fonts (Fontsource) + Tailwind v4 wired into Starlight   */
+/*  via @astrojs/starlight-tailwind, then the Nexis brand theme.        */
+/* ------------------------------------------------------------------ */
+
+/* Layer order must be declared before the imports below. */
+@layer base, starlight, theme, components, utilities;
+
+/* Self-hosted variable fonts (Inter body, JetBrains Mono code). */
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+
+/* Tailwind, bridged into Starlight's own cascade layers. */
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* Expose the Nexis brand orange as a Tailwind color utility. */
+@theme {
+  --color-nexis: #f54e00;
+  --color-nexis-active: #d04200;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Nexis brand theme — dark is the default (matches the app + logo).  */
+/*  Warm charcoal grays bottoming out at the Nexis ink (#26251e);      */
+/*  accent is the scarce Nexis orange (#f54e00).                       */
+/* ------------------------------------------------------------------ */
+:root {
+  /* Accent ramp (orange) */
+  --sl-color-accent-low: #4a1600;
+  --sl-color-accent: #f54e00;
+  --sl-color-accent-high: #ffc4a3;
+
+  /* Warm neutral ramp — light text → dark surface */
+  --sl-color-white: #faf9f6;
+  --sl-color-gray-1: #ecebe4;
+  --sl-color-gray-2: #c5c2b8;
+  --sl-color-gray-3: #918d80;
+  --sl-color-gray-4: #57544c;
+  --sl-color-gray-5: #34332c;
+  --sl-color-gray-6: #26251e;
+  --sl-color-black: #1a1914;
+
+  /* Brand fonts */
+  --sl-font: 'Inter Variable', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --sl-font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code',
+    'Source Code Pro', Menlo, Consolas, monospace;
+}
+
+/* Light mode — warm cream canvas (#f7f7f4) with warm-ink text (#26251e). */
+:root[data-theme='light'] {
+  --sl-color-accent-low: #ffd8c4;
+  --sl-color-accent: #d84400;
+  --sl-color-accent-high: #5e1c00;
+
+  --sl-color-white: #26251e;
+  --sl-color-gray-1: #34332c;
+  --sl-color-gray-2: #57544c;
+  --sl-color-gray-3: #807d72;
+  --sl-color-gray-4: #a09c92;
+  --sl-color-gray-5: #cfcdc4;
+  --sl-color-gray-6: #e6e5e0;
+  --sl-color-gray-7: #efeee8;
+  --sl-color-black: #f7f7f4;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Small brand touches                                                */
+/* ------------------------------------------------------------------ */
+
+/* Slightly tighter, more editorial display headings (Nexis voice). */
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+h1#_top,
+.hero h1 {
+  letter-spacing: -0.02em;
+}
+
+/* Site title/logo sizing in the header. */
+.site-title img {
+  border-radius: 8px;
+}
+
+/* Hero splash: give the big logo a subtle rounded frame like the app icon. */
+.hero img {
+  border-radius: 22%;
+}

@@ -1,0 +1,26 @@
+---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import ImagePreviewer from './ImagePreviewer.tsx';
+
+interface Props {
+	/** Imported image from `src/assets`, e.g. `import shot from '../../../assets/x.png'`. */
+	src: ImageMetadata;
+	alt: string;
+	caption?: string;
+}
+
+const { src, alt, caption } = Astro.props;
+
+// Optimize once at build time (sharp), then hand the URL to the React island.
+const optimized = await getImage({ src, width: 1280, format: 'webp' });
+---
+
+<ImagePreviewer
+	client:visible
+	src={optimized.src}
+	alt={alt}
+	caption={caption}
+	width={optimized.attributes.width ?? optimized.options.width}
+	height={optimized.attributes.height}
+/>

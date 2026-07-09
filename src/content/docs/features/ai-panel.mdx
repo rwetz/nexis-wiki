@@ -1,0 +1,58 @@
+---
+title: AI panel
+description: The Nexis AI panel — 12+ providers or fully offline, multi-agent workflows, and tool approval.
+sidebar:
+  order: 3
+---
+
+import { Kbd } from 'starlight-kbd/components';
+import Screenshot from '../../../components/Screenshot.astro';
+import aiShot from '../../../assets/ai.png';
+
+The AI panel is a dockable assistant that shares your workspace context. Toggle
+it any time with <Kbd linux="ctrl+i" mac="cmd+i" windows="ctrl+i" />.
+
+<Screenshot src={aiShot} alt="The Nexis AI panel showing an agentic workflow with edit diffs" caption="The AI panel running an agentic workflow, with proposed edits shown as diffs in the editor." />
+
+## Providers — or none at all
+
+- **12+ cloud providers** — OpenAI, Anthropic, Google, Groq, xAI, Cerebras,
+  DeepSeek, Mistral, OpenRouter, Hugging Face Inference API, and any
+  OpenAI-compatible endpoint.
+- **Fully offline** — LM Studio, MLX, and Ollama, with no API key required.
+
+Configure them under **Settings → AI**. See [AI providers](/configuration/ai-providers/)
+for the full list and setup. Keys live in the **OS keychain** — never on disk.
+
+## Agents and tools
+
+- **Multi-agent and sub-agents** with tool approval flows.
+- **Agent queue** — queue follow-up tasks while an agent runs; they execute in
+  order. Stop queued or running tasks from the **Activity** panel.
+- **File, shell, search, and plan tools** — every one requires **explicit
+  approval** before it executes.
+- **Slash commands and skills**, plus **prompt templates** with `{VAR}`
+  placeholder substitution.
+- **Semantic search** — embed and search codebase symbols and docs so the AI
+  retrieves the right context.
+- **Voice input** — Whisper transcription via OpenAI.
+- **Auto-compaction** keeps long conversations within the context window.
+
+## Transparency
+
+- **AI context inspector** — a panel that shows exactly what context is sent to
+  the model.
+- **Private terminals** — the AI cannot read their scrollback.
+- **Project memory** — drop a `NEXIS.md` in your project root and the AI
+  remembers your conventions across sessions.
+
+## Terminal ↔ AI
+
+- Select terminal output and click **Ask Nexis** or **Explain** to send it
+  straight to the chat.
+- **Inline explain** — select any terminal output or code and click **Explain**;
+  the answer appears in a mini window without disrupting your flow.
+- **Explain commit** — click a commit in git history for a plain-English
+  breakdown of what changed and why.
+
+The panel is **dockable** — resize, float, and snap it back to the dock.
