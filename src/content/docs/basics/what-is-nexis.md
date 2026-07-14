@@ -28,6 +28,15 @@ in the system webview — which is how the whole app stays so small.
 - **ML Lab** — train small models on your own data with live charts and an
   inference playground. See [ML Suite](/ml-suite/).
 
+## Part of an ecosystem
+
+The terminal is the flagship of a wider **Nexis ecosystem** — a family of
+developer tools sharing the same stack, design system, and local-first,
+zero-telemetry philosophy: the [ML Suite](/ml-suite/) engines,
+[Nexis Benchmark](/ecosystem/nexis-benchmark/) for measuring local AI models,
+and the [Dev Dashboard](/ecosystem/nexis-dev-dashboard/) for multi-repo git
+status. See [The Nexis ecosystem](/ecosystem/) for the full map.
+
 ## Who it's for
 
 Developers who live in the terminal and want an editor, an AI assistant, and

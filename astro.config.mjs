@@ -80,6 +80,14 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Ecosystem',
+					items: [
+						{ label: 'Overview', slug: 'ecosystem' },
+						{ label: 'Nexis Benchmark', slug: 'ecosystem/nexis-benchmark' },
+						{ label: 'Dev Dashboard', slug: 'ecosystem/nexis-dev-dashboard' },
+					],
+				},
+				{
 					label: 'Troubleshooting',
 					items: [{ autogenerate: { directory: 'troubleshooting' } }],
 				},

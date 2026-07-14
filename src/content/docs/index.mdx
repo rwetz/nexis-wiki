@@ -28,9 +28,11 @@ import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 ## Welcome
 
-This is the documentation home for the **Nexis ecosystem** — the Nexis terminal
-app and its two ML engines. Pick a starting point below, or use the search box
-(<kbd>/</kbd>) to jump straight to a topic.
+This is the documentation home for the **Nexis ecosystem** — a family of
+developer tools built around the Nexis terminal: two ML engines, a local-AI
+benchmark app, a multi-repo dev dashboard, and a shared design system. Pick a
+starting point below, or use the search box (<kbd>/</kbd>) to jump straight to
+a topic.
 
 <CardGrid stagger>
 	<Card title="New here?" icon="rocket">
@@ -54,15 +56,38 @@ app and its two ML engines. Pick a starting point below, or use the search box
 
 ## The ecosystem
 
+Nexis is a **developer ecosystem**, not just one app — see the
+[ecosystem overview](/ecosystem/) for how the pieces fit together.
+
 <CardGrid>
 	<LinkCard
 		title="Nexis"
 		href="/basics/what-is-nexis/"
-		description="The AI-native terminal & developer environment. Tauri 2 · Rust · React 19."
+		description="The AI-native terminal & developer environment — the flagship. Tauri 2 · Rust · React 19."
 	/>
 	<LinkCard
 		title="ML Suite"
 		href="/ml-suite/"
 		description="Train small models on your own data from the ML Lab panel — a Python engine or a single-binary Rust engine."
+	/>
+	<LinkCard
+		title="Nexis Benchmark"
+		href="/ecosystem/nexis-benchmark/"
+		description="Benchmark local AI models — ONNX & GGUF across real inference backends, with throughput, latency, and memory side by side."
+	/>
+	<LinkCard
+		title="Dev Dashboard"
+		href="/ecosystem/nexis-dev-dashboard/"
+		description="Git status across all your local repos in one glance — native Rust scanning, 17 repos in ~20 ms."
+	/>
+	<LinkCard
+		title="nexisdev.org"
+		href="https://nexisdev.org"
+		description="The marketing site — Next.js 16, shadcn/ui, Tailwind v4."
+	/>
+	<LinkCard
+		title="All repositories"
+		href="https://github.com/rwetz?tab=repositories"
+		description="Every ecosystem project is open source under github.com/rwetz, Apache-2.0 licensed."
 	/>
 </CardGrid>
