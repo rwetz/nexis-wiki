@@ -57,6 +57,12 @@
 		}
 	}
 
+	/* Beats the display:flex above — the UA sheet's [hidden] rule would not.
+	   Set by the script on splash pages, which have no sidebar. */
+	.sidebar-toggle[hidden] {
+		display: none;
+	}
+
 	.sidebar-toggle:hover,
 	.sidebar-toggle:focus-visible {
 		background: var(--sl-color-gray-6, var(--sl-color-gray-5));
@@ -102,6 +108,14 @@
 	function setup() {
 		const button = document.querySelector<HTMLButtonElement>('.sidebar-toggle');
 		if (!button) return;
+
+		// Splash pages (the homepage) render no sidebar. A toggle there would
+		// shift the content with nothing to reveal, so hide it outright.
+		if (!document.querySelector('.sidebar-pane')) {
+			button.hidden = true;
+			return;
+		}
+		button.hidden = false;
 
 		sync(button);
 

@@ -142,8 +142,18 @@ summary,
      to 24px from the window edge while the table of contents still occupies
      ~400px on the right — badly lopsided, and it reads as a broken layout
      rather than a roomier one. Keeping a partial gutter hands back most of the
-     space while leaving the column visibly inset. */
-  html[data-sidebar-collapsed] .main-frame {
+     space while leaving the column visibly inset.
+
+     Two things about the selector:
+
+     - It's gated on `:has(.sidebar-pane)` because splash pages (the homepage)
+       render no sidebar and Starlight already zeroes the gutter there. Without
+       the gate the toggle shoves splash content sideways with no sidebar to
+       show for it.
+     - The `:has()` goes on `.page`, not `.main-frame` — `.sidebar-pane` sits in
+       a sibling `.sidebar` wrapper, so `.main-frame:has(.sidebar-pane)` never
+       matches and the rule silently does nothing. */
+  html[data-sidebar-collapsed] .page:has(.sidebar-pane) .main-frame {
     padding-inline-start: 6rem;
   }
 }
