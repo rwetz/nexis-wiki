@@ -1,26 +1,38 @@
 ---
 /**
- * Header button that collapses / expands the left nav sidebar, giving the
- * content column the sidebar's width back. Useful on pages with wide content
- * (the architecture Mermaid diagrams in particular).
+ * Header button that reveals the site nav. It has two modes, because Starlight
+ * gives its two page templates very different layouts:
  *
- * State lives in `data-sidebar-collapsed` on <html> and is persisted to
- * localStorage. The initial value is applied by an inline head script (see
- * astro.config.mjs) so there's no flash of the wrong layout on load.
+ *   doc pages    — a real `.sidebar-pane` column exists. The button collapses
+ *                  it, handing its 300px back to the content column (nice for
+ *                  the wide Mermaid diagrams in Architecture). State lives in
+ *                  `data-sidebar-collapsed` on <html>, persisted to
+ *                  localStorage, applied pre-paint by the inline head script in
+ *                  astro.config.mjs so the layout doesn't flash.
  *
- * Desktop only — below Starlight's 50rem breakpoint the sidebar pane *is* the
- * mobile menu, so collapsing it would break navigation.
+ *   splash pages — the homepage. Starlight renders NO sidebar here at all, so
+ *                  there is nothing to collapse. Instead we render our own
+ *                  drawer from the same sidebar data and slide it over the
+ *                  content, leaving the full-bleed landing layout untouched.
+ *
+ * The mode is decided at build time from the route's template, so the button is
+ * never rendered in a state it can't act on.
  */
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+
+const { sidebar, entry } = Astro.locals.starlightRoute;
+const isSplash = entry.data.template === 'splash';
 ---
 
 <button
 	type="button"
 	class="sidebar-toggle"
-	aria-pressed="false"
-	aria-controls="starlight__sidebar"
-	title="Toggle sidebar"
+	aria-expanded="false"
+	aria-controls={isSplash ? 'nexis-nav-drawer' : 'starlight__sidebar'}
+	data-mode={isSplash ? 'drawer' : 'collapse'}
+	title={isSplash ? 'Show navigation' : 'Hide sidebar'}
 >
-	<span class="sr-only">Toggle sidebar</span>
+	<span class="sr-only">Toggle navigation</span>
 	<svg
 		aria-hidden="true"
 		viewBox="0 0 24 24"
@@ -35,9 +47,22 @@
 	</svg>
 </button>
 
+{
+	isSplash && (
+		<>
+			<div class="nav-drawer-backdrop" data-nav-backdrop hidden />
+			<nav id="nexis-nav-drawer" class="nav-drawer" aria-label="Site navigation" hidden>
+				<div class="nav-drawer-inner">
+					<SidebarSublist sublist={sidebar} />
+				</div>
+			</nav>
+		</>
+	)
+}
+
 <style>
 	.sidebar-toggle {
-		display: none;
+		display: flex;
 		align-items: center;
 		justify-content: center;
 		width: 2rem;
@@ -50,17 +75,14 @@
 		cursor: pointer;
 	}
 
-	/* Only meaningful where the sidebar is a real column. */
-	@media (min-width: 50rem) {
-		.sidebar-toggle {
-			display: flex;
+	/* The collapse mode only means something where the sidebar is a real
+	   column; below Starlight's 50rem breakpoint that pane IS the mobile menu,
+	   so collapsing it would strand the user with no nav. The drawer mode has
+	   no such problem and stays available at every width. */
+	@media (max-width: 50rem) {
+		.sidebar-toggle[data-mode='collapse'] {
+			display: none;
 		}
-	}
-
-	/* Beats the display:flex above — the UA sheet's [hidden] rule would not.
-	   Set by the script on splash pages, which have no sidebar. */
-	.sidebar-toggle[hidden] {
-		display: none;
 	}
 
 	.sidebar-toggle:hover,
@@ -74,13 +96,71 @@
 		height: 1.25rem;
 	}
 
-	/* Fill the pane indicator when the sidebar is showing. */
 	.sidebar-toggle line {
 		transition: opacity 0.15s ease;
 	}
 
-	:global(html[data-sidebar-collapsed]) .sidebar-toggle line {
+	/* Dim the pane indicator whenever the nav is hidden. */
+	:global(html[data-sidebar-collapsed]) .sidebar-toggle[data-mode='collapse'] line {
 		opacity: 0.35;
+	}
+	.sidebar-toggle[data-mode='drawer'][aria-expanded='false'] line {
+		opacity: 0.35;
+	}
+
+	/* ── Splash drawer ──────────────────────────────────────────────────── */
+
+	.nav-drawer-backdrop {
+		position: fixed;
+		inset: 0;
+		z-index: calc(var(--sl-z-index-navbar, 10) + 10);
+		background: rgb(0 0 0 / 0.5);
+		opacity: 0;
+		transition: opacity 0.2s ease;
+	}
+
+	.nav-drawer {
+		position: fixed;
+		inset-block: 0;
+		inset-inline-start: 0;
+		z-index: calc(var(--sl-z-index-navbar, 10) + 11);
+		width: min(18rem, 80vw);
+		background: var(--sl-color-bg-sidebar, var(--sl-color-bg));
+		border-inline-end: 1px solid var(--sl-color-hairline-shade);
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		transform: translateX(-100%);
+		transition: transform 0.2s ease;
+	}
+	:global([dir='rtl']) .nav-drawer {
+		transform: translateX(100%);
+	}
+
+	/* `hidden` wins over the transition states so the drawer is inert when
+	   closed — a bare `transform` would leave it focusable off-screen. */
+	.nav-drawer[hidden],
+	.nav-drawer-backdrop[hidden] {
+		display: none;
+	}
+
+	.nav-drawer[data-open],
+	:global([dir='rtl']) .nav-drawer[data-open] {
+		transform: translateX(0);
+	}
+	.nav-drawer-backdrop[data-open] {
+		opacity: 1;
+	}
+
+	.nav-drawer-inner {
+		/* Clear the fixed header so the first link isn't tucked under it. */
+		padding: calc(var(--sl-nav-height, 3.5rem) + 1rem) 1rem 2rem;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.nav-drawer,
+		.nav-drawer-backdrop {
+			transition: none;
+		}
 	}
 
 	.sr-only {
@@ -99,47 +179,89 @@
 <script>
 	const KEY = 'nexis-wiki:sidebar-collapsed';
 
-	function sync(button: HTMLButtonElement) {
-		const collapsed = document.documentElement.hasAttribute('data-sidebar-collapsed');
-		button.setAttribute('aria-pressed', String(collapsed));
-		button.title = collapsed ? 'Show sidebar' : 'Hide sidebar';
+	function setupCollapse(button: HTMLButtonElement) {
+		const root = document.documentElement;
+
+		const sync = () => {
+			const collapsed = root.hasAttribute('data-sidebar-collapsed');
+			button.setAttribute('aria-expanded', String(!collapsed));
+			button.title = collapsed ? 'Show sidebar' : 'Hide sidebar';
+		};
+
+		button.addEventListener('click', () => {
+			const collapsed = root.hasAttribute('data-sidebar-collapsed');
+			root.toggleAttribute('data-sidebar-collapsed', !collapsed);
+			try {
+				localStorage.setItem(KEY, collapsed ? '0' : '1');
+			} catch {
+				// Private mode / storage disabled — still works for this page.
+			}
+			sync();
+			// Mermaid sizes to its container; nudge anything width-sensitive.
+			window.dispatchEvent(new Event('resize'));
+		});
+
+		sync();
+	}
+
+	function setupDrawer(button: HTMLButtonElement) {
+		const drawer = document.getElementById('nexis-nav-drawer');
+		const backdrop = document.querySelector<HTMLElement>('[data-nav-backdrop]');
+		if (!drawer || !backdrop) return;
+
+		let open = false;
+
+		const setOpen = (next: boolean) => {
+			open = next;
+			button.setAttribute('aria-expanded', String(next));
+			button.title = next ? 'Hide navigation' : 'Show navigation';
+			document.body.style.overflow = next ? 'hidden' : '';
+
+			if (next) {
+				drawer.hidden = false;
+				backdrop.hidden = false;
+				// Unhiding and transforming in the same frame gets coalesced into
+				// no transition at all, so flip the open flag on the next frame.
+				requestAnimationFrame(() => {
+					drawer.setAttribute('data-open', '');
+					backdrop.setAttribute('data-open', '');
+				});
+				drawer.querySelector<HTMLAnchorElement>('a')?.focus();
+			} else {
+				drawer.removeAttribute('data-open');
+				backdrop.removeAttribute('data-open');
+				const hide = () => {
+					if (open) return; // reopened mid-transition
+					drawer.hidden = true;
+					backdrop.hidden = true;
+				};
+				drawer.addEventListener('transitionend', hide, { once: true });
+				// transitionend never fires under prefers-reduced-motion.
+				setTimeout(hide, 250);
+			}
+		};
+
+		button.addEventListener('click', () => setOpen(!open));
+		backdrop.addEventListener('click', () => setOpen(false));
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape' && open) {
+				setOpen(false);
+				button.focus();
+			}
+		});
+		// Following a link should leave the drawer closed behind it.
+		drawer.addEventListener('click', (event) => {
+			if ((event.target as HTMLElement).closest('a')) setOpen(false);
+		});
 	}
 
 	function setup() {
 		const button = document.querySelector<HTMLButtonElement>('.sidebar-toggle');
-		if (!button) return;
+		if (!button || button.dataset.bound) return;
+		button.dataset.bound = 'true';
 
-		// Splash pages (the homepage) render no sidebar. A toggle there would
-		// shift the content with nothing to reveal, so hide it outright.
-		if (!document.querySelector('.sidebar-pane')) {
-			button.hidden = true;
-			return;
-		}
-		button.hidden = false;
-
-		sync(button);
-
-		button.addEventListener('click', () => {
-			const root = document.documentElement;
-			const collapsed = root.hasAttribute('data-sidebar-collapsed');
-
-			if (collapsed) {
-				root.removeAttribute('data-sidebar-collapsed');
-			} else {
-				root.setAttribute('data-sidebar-collapsed', '');
-			}
-
-			try {
-				localStorage.setItem(KEY, collapsed ? '0' : '1');
-			} catch {
-				// Private mode / storage disabled — the toggle still works for this page.
-			}
-
-			sync(button);
-			// Mermaid sizes to its container, and xterm-style fit logic elsewhere
-			// listens for the same signal. Nudge anything width-sensitive.
-			window.dispatchEvent(new Event('resize'));
-		});
+		if (button.dataset.mode === 'drawer') setupDrawer(button);
+		else setupCollapse(button);
 	}
 
 	setup();
