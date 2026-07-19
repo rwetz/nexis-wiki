@@ -88,3 +88,34 @@ h1#_top,
 .hero img {
   border-radius: 22%;
 }
+
+/* ------------------------------------------------------------------ */
+/*  Mobile / touch fixes                                               */
+/* ------------------------------------------------------------------ */
+
+/* iOS Safari resolves `100vh` against the *large* viewport (URL bar hidden),
+   so full-height fixed panels run ~60-90px taller than what you can actually
+   see and their last rows sit behind the browser chrome. `dvh` tracks the
+   visible viewport instead. Starlight's own `100vh` rules stay in place as the
+   fallback for browsers without dvh; these are unlayered, so they win over
+   `@layer starlight.core` regardless of specificity. */
+@supports (height: 100dvh) {
+  /* Open mobile nav / table-of-contents panel (TwoColumnContent.astro). */
+  .right-sidebar {
+    height: 100dvh;
+  }
+  /* Page shell (PageFrame.astro) — keeps the footer off the fold. */
+  .page {
+    min-height: 100dvh;
+  }
+}
+
+/* Kill the ~300ms tap delay and the grey flash Safari/Chrome paint over
+   tapped controls — both read as lag on a phone. */
+a,
+button,
+summary,
+[role='button'] {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
