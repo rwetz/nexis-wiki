@@ -119,3 +119,46 @@ summary,
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
 }
+
+/* ── Collapsible sidebar ───────────────────────────────────────────────────
+   The header toggle (src/components/SidebarToggle.astro) sets
+   `data-sidebar-collapsed` on <html>. Hiding the sidebar pane hands its 300px
+   back to the content column, which matters most on the architecture pages —
+   the wide Mermaid flowcharts otherwise scale down to ~0.3x and go unreadable.
+
+   Scoped to the desktop breakpoint on purpose: below 50rem the sidebar pane is
+   the mobile nav menu, and hiding it would strand navigation. Unlayered so it
+   wins over `@layer starlight.core` without specificity games. */
+@media (min-width: 50rem) {
+  html[data-sidebar-collapsed] .sidebar-pane {
+    display: none;
+  }
+
+  /* Hiding the pane alone isn't enough: `.main-frame` reserves a gutter equal
+     to the sidebar width via padding-inline-start, so the content column stays
+     put. Zero the gutter to actually hand the space back. */
+  html[data-sidebar-collapsed] .main-frame {
+    padding-inline-start: 0;
+  }
+
+  /* Let prose and diagrams use the reclaimed width. */
+  html[data-sidebar-collapsed] .main-pane {
+    --sl-content-width: 62rem;
+  }
+}
+
+/* Mermaid diagrams: center them, and let anything genuinely wider than the
+   column scroll horizontally rather than shrinking past legibility. */
+.mermaid {
+  display: block;
+  overflow-x: auto;
+  margin-inline: auto;
+  padding: 0.25rem 0;
+  background: transparent !important;
+  text-align: center;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}

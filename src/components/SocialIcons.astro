@@ -1,0 +1,12 @@
+---
+/**
+ * Starlight override: adds the sidebar collapse toggle to the header, ahead of
+ * the stock social icons. Overriding SocialIcons is the sanctioned way to add
+ * header items without reimplementing the whole Header component.
+ */
+import Default from '@astrojs/starlight/components/SocialIcons.astro';
+import SidebarToggle from './SidebarToggle.astro';
+---
+
+<SidebarToggle />
+<Default><slot /></Default>

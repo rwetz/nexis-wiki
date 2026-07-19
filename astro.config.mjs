@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import react from '@astrojs/react';
 import starlightKbd from 'starlight-kbd';
+import mermaid from 'astro-mermaid';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
@@ -10,6 +11,16 @@ export default defineConfig({
 	site: 'https://wiki.nexisdev.org',
 
 	integrations: [
+		// Renders ```mermaid fences in the architecture docs. Must come before
+		// starlight so it transforms the code fences first.
+		mermaid({
+			// Follows Starlight's `data-theme` on <html>, so diagrams flip with the
+			// site's light/dark toggle.
+			autoTheme: true,
+			mermaidConfig: {
+				flowchart: { curve: 'basis' },
+			},
+		}),
 		starlight({
 			title: 'Nexis Wiki',
 			description:
@@ -33,6 +44,19 @@ export default defineConfig({
 				root: { label: 'English', lang: 'en' },
 			},
 			customCss: ['./src/styles/global.css'],
+			// Adds the sidebar collapse toggle to the header.
+			components: {
+				SocialIcons: './src/components/SocialIcons.astro',
+			},
+			head: [
+				{
+					// Applies the persisted sidebar state before first paint, so the
+					// layout doesn't flash expanded-then-collapsed on load.
+					tag: 'script',
+					content:
+						"try{if(localStorage.getItem('nexis-wiki:sidebar-collapsed')==='1'){document.documentElement.setAttribute('data-sidebar-collapsed','')}}catch(e){}",
+				},
+			],
 			plugins: [
 				// Renders <Kbd> shortcuts per-OS with an automatic detector + picker.
 				starlightKbd({
@@ -70,6 +94,15 @@ export default defineConfig({
 				{
 					label: 'Configuration',
 					items: [{ autogenerate: { directory: 'configuration' } }],
+				},
+				{
+					label: 'Architecture',
+					items: [
+						{ label: 'Overview', slug: 'architecture' },
+						{ label: 'Terminal internals', slug: 'architecture/terminal' },
+						{ label: 'AI pipeline', slug: 'architecture/ai-pipeline' },
+						{ label: 'Security model', slug: 'architecture/security' },
+					],
 				},
 				{
 					label: 'ML Suite',
