@@ -135,15 +135,16 @@ summary,
   }
 
   /* Hiding the pane alone isn't enough: `.main-frame` reserves a gutter equal
-     to the sidebar width via padding-inline-start, so the content column stays
-     put. Zero the gutter to actually hand the space back. */
-  html[data-sidebar-collapsed] .main-frame {
-    padding-inline-start: 0;
-  }
+     to the sidebar width (300px) via padding-inline-start, so the content
+     column stays put.
 
-  /* Let prose and diagrams use the reclaimed width. */
-  html[data-sidebar-collapsed] .main-pane {
-    --sl-content-width: 62rem;
+     Zeroing that gutter entirely reclaims the most width, but drops the column
+     to 24px from the window edge while the table of contents still occupies
+     ~400px on the right — badly lopsided, and it reads as a broken layout
+     rather than a roomier one. Keeping a partial gutter hands back most of the
+     space while leaving the column visibly inset. */
+  html[data-sidebar-collapsed] .main-frame {
+    padding-inline-start: 6rem;
   }
 }
 
