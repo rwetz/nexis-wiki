@@ -2,7 +2,7 @@
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
-Documentation wiki for the **[Nexis](https://github.com/rwetz/Nexis)** ecosystem —
+Documentation wiki for the **[Nexis](https://github.com/rwetz/Nexis)** ecosystem:
 the open-source, AI-native terminal & developer environment, plus its two ML
 engines.
 
@@ -12,21 +12,21 @@ Live at **[wiki.nexisdev.org](https://wiki.nexisdev.org)**.
 
 Architecturally a clone of the [CachyOS wiki](https://wiki.cachyos.org/) stack:
 
-- **[Astro](https://astro.build)** — islands SSG (ships zero JS by default)
-- **[Starlight](https://starlight.astro.build)** — the docs theme (sidebar, TOC,
+- **[Astro](https://astro.build)**: islands SSG (ships zero JS by default)
+- **[Starlight](https://starlight.astro.build)**: the docs theme (sidebar, TOC,
   search, dark mode, prev/next, edit links)
 - **[Tailwind CSS v4](https://tailwindcss.com)** via `@astrojs/starlight-tailwind`
   + `@tailwindcss/vite`
-- **[React](https://react.dev)** islands (`@astrojs/react`) — e.g. the image
+- **[React](https://react.dev)** islands (`@astrojs/react`), for example the image
   previewer in `src/components/`
-- **[Pagefind](https://pagefind.app)** — static full-text search (bundled with
+- **[Pagefind](https://pagefind.app)**: static full-text search (bundled with
   Starlight; indexes at build)
-- **[starlight-kbd](https://github.com/HiDeoo/starlight-kbd)** — per-OS keyboard
+- **[starlight-kbd](https://github.com/HiDeoo/starlight-kbd)**: per-OS keyboard
   shortcuts
-- **Fontsource** — self-hosted **Inter** (body) + **JetBrains Mono** (code)
-- **[Lunaria](https://lunaria.dev)** — translation status tracking (i18n-ready,
+- **Fontsource**: self-hosted **Inter** (body) + **JetBrains Mono** (code)
+- **[Lunaria](https://lunaria.dev)**: translation status tracking (i18n-ready,
   English-only at launch)
-- **sharp** — build-time image optimization
+- **sharp**: build-time image optimization
 
 ## Requirements
 
@@ -78,3 +78,7 @@ is set through [`public/CNAME`](public/CNAME).
 
 The **stack and architecture** mirror the open-source CachyOS wiki; all **article
 text is original** and specific to Nexis.
+
+## License
+
+[MIT](LICENSE). Article text is original; the stack mirrors the open-source CachyOS wiki.
