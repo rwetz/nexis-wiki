@@ -21,7 +21,7 @@ it any time with <Kbd linux="ctrl+i" mac="cmd+i" windows="ctrl+i" />.
   OpenAI-compatible endpoint.
 - **Fully offline** — LM Studio, MLX, and Ollama, with no API key required.
 
-Configure them under **Settings → AI**. See [AI providers](/configuration/ai-providers/)
+Configure them under **Settings → AI → Models**. See [AI providers](/configuration/ai-providers/)
 for the full list and setup. Keys live in the **OS keychain** — never on disk.
 
 ## Agents and tools
@@ -29,8 +29,10 @@ for the full list and setup. Keys live in the **OS keychain** — never on disk.
 - **Multi-agent and sub-agents** with tool approval flows.
 - **Agent queue** — queue follow-up tasks while an agent runs; they execute in
   order. Stop queued or running tasks from the **Activity** panel.
-- **File, shell, search, and plan tools** — every one requires **explicit
-  approval** before it executes.
+- **File, shell, search, and plan tools** — governed by per-tool prompt, deny,
+  allow, or read-only auto-approval policies.
+- **Custom TypeScript tools** — scaffold workspace-specific agent capabilities
+  without modifying Nexis itself.
 - **Slash commands and skills**, plus **prompt templates** with `{VAR}`
   placeholder substitution.
 - **Semantic search** — embed and search codebase symbols and docs so the AI
@@ -45,6 +47,8 @@ for the full list and setup. Keys live in the **OS keychain** — never on disk.
 - **Private terminals** — the AI cannot read their scrollback.
 - **Project memory** — drop a `NEXIS.md` in your project root and the AI
   remembers your conventions across sessions.
+- **Git-backed checkpoints** — revert one agent turn without discarding other
+  worktree changes.
 
 ## Terminal ↔ AI
 

@@ -6,8 +6,8 @@ description: The Nexis ML Lab and its two interchangeable engines — Python and
 The **ML Suite** lets you train small models on your own data, entirely on your
 machine — no cloud, no accounts. It has two halves:
 
-- **ML Lab** — a sidebar panel inside Nexis: templates, live training charts, an
-  inference playground, and a run browser.
+- **ML Lab** — a reusable workbench tab inside Nexis: templates, live training
+  charts, an inference playground, and a run browser.
 - **An engine** — the tool that does the actual training. Nexis ships a UI and
   spawns an engine to do the work.
 
@@ -15,6 +15,9 @@ machine — no cloud, no accounts. It has two halves:
 
 The panel **auto-detects** whichever engine is installed and only shows the
 options that engine supports:
+
+The standalone Rust engine is the default path. Nexis can detect a Python engine
+you install yourself, but it no longer runs `pip install` on your behalf.
 
 | Engine | Language | Best for |
 | --- | --- | --- |
@@ -43,6 +46,8 @@ Rust engine can be read by the Python engine, and vice versa.
   matrices and sample-prediction grids render inline.
 - **Hyperparameter form & HTML report export** — tweak `train.toml` keys without
   leaving the panel, and export a self-contained HTML report of any run.
+- **Benchmark companion** — compare `.onnx` and `.gguf` models from the same
+  AI / ML workbench, with the managed nexis-ml engine resolved consistently.
 
 ## What it is *not*
 

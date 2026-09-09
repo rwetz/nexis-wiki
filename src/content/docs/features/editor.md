@@ -20,6 +20,8 @@ Dockerfile.
   provider and model.
 - **Diff approval** — AI-proposed edits are shown as **per-hunk diffs**; approve
   or reject each change individually. Nothing is written until you say so.
+- **Agent checkpoints** — each agent change can create a Git-backed checkpoint
+  that reverts only that turn without disturbing unrelated work.
 
 ## Refactoring and navigation
 
@@ -55,10 +57,10 @@ Dockerfile.
 ## Viewers
 
 - **Markdown preview** — right-click a `.md` file → **Open Preview**.
-- **Jupyter notebook viewer** — right-click any `.ipynb` to open a static cell
-  viewer that renders code, markdown, stream, and error outputs without a kernel.
+- **Jupyter notebook viewer** — right-click any `.ipynb` to open a **static**
+  viewer for code, markdown, stream, and error outputs. It does not run cells.
 
 ## Live sync
 
-The editor and explorer update in real time as files change on disk, so external
-tools and the AI stay reflected instantly.
+The editor and explorer update from a native filesystem watcher as files change
+on disk, so external tools and the AI stay reflected without polling.

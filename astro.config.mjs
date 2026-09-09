@@ -89,7 +89,10 @@ export default defineConfig({
 				},
 				{
 					label: 'Features',
-					items: [{ autogenerate: { directory: 'features' } }],
+					items: [
+						{ label: 'Workbench & packs', slug: 'features/workbench-packs' },
+						{ autogenerate: { directory: 'features' } },
+					],
 				},
 				{
 					label: 'Configuration',
@@ -116,8 +119,8 @@ export default defineConfig({
 					label: 'Ecosystem',
 					items: [
 						{ label: 'Overview', slug: 'ecosystem' },
-						{ label: 'Nexis Benchmark', slug: 'ecosystem/nexis-benchmark' },
-						{ label: 'Dev Dashboard', slug: 'ecosystem/nexis-dev-dashboard' },
+						{ label: 'Benchmark', slug: 'ecosystem/nexis-benchmark' },
+						{ label: 'Atlas', slug: 'ecosystem/nexis-dev-dashboard' },
 					],
 				},
 				{

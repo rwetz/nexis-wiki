@@ -51,7 +51,7 @@ Install PowerShell 7+ if you want `pwsh` to be picked first.
 
 ### The AI panel can't reach my model
 
-- **Cloud provider** — confirm the key is set under **Settings → AI** and the
+- **Cloud provider** — confirm the key is set under **Settings → AI → Models** and the
   provider is selected. Keys live in the OS keychain.
 - **Local model** — check that LM Studio / MLX / Ollama is running and that the
   endpoint URL in settings matches. See [AI providers](/configuration/ai-providers/).

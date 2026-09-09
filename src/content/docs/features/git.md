@@ -15,6 +15,9 @@ app.
 - **Per-file diffs** with syntax highlighting, shown as a unified diff view.
 - **Stash manager** — list, create, apply, pop, and drop stashes directly from
   the panel.
+- **Pre-commit secret scan** — scans only added lines, opens itself when it finds
+  a redacted match, and lets you keep committing or ignore a false positive for
+  that repository.
 
 ## AI assistance
 
@@ -24,6 +27,8 @@ app.
   diff.
 - **Explain commit** — click any commit in the history for a plain-English
   breakdown of what changed and why.
+- **Agent checkpoints** — revert the files changed by one AI turn through a
+  Git-backed checkpoint without resetting the rest of the worktree.
 
 ## Related panels
 

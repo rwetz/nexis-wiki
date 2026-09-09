@@ -10,9 +10,21 @@ and the file-explorer icons.
 
 ## Built-in themes
 
-Ships with: **Nexis Default**, **Catppuccin Mocha**, **Nord**, **Tokyo Night**,
-**Rosé Pine**, **Gruvbox**, **Caffeine**, **Claude**, **Sage**, and **Tide**.
-Each theme carries its own terminal color palette.
+Nexis ships **22 built-in themes**, all with light and dark variants:
+
+- **17 Nexis palettes:** Nexis Default, Halcyon, Meridian, Cinder, Aurelian,
+  Thicket, Vermillion, Hotwire, Tangerine, Sulfur, Acid, Absinthe, Cyanotype,
+  Glacier, Ultramarine, Ultraviolet, and Synthwave.
+- **5 credited community palettes:** Tokyo Night, Catppuccin, Nord, Gruvbox,
+  and Rosé Pine.
+
+The Nexis palettes share one generated OKLCH lightness ramp and build-enforced
+contrast floors. File-tree icons retint onto the active terminal palette, while
+brand-logo fallbacks keep their original colors.
+
+Nexis Default also has an optional rainbow hover accent under **Settings →
+Themes**. It colors eligible icon/text marks and the live AI aurora, not whole
+button surfaces.
 
 ## Custom themes
 
@@ -34,6 +46,6 @@ MongoDB, and more) still get purpose-built art.
 
 ## Configuring
 
-Themes are set under **Settings → Appearance**. See
+Themes are set under **Settings → Themes**. See
 [configuration → themes](/configuration/themes/) for details on authoring your
 own.

@@ -1,83 +1,50 @@
 ---
-title: Nexis Benchmark
-description: A desktop app for benchmarking local AI models — ONNX and GGUF across inference backends, with real ONNX Runtime, llama.cpp, and nexis-ml-rs engines.
+title: Benchmark
+description: The Nexis companion window for comparing ONNX and GGUF models across inference and training backends.
 ---
 
-**Nexis Benchmark** is a desktop app for benchmarking local AI models. Drop in
-**ONNX** or **GGUF** models, pick a task, run a standardized benchmark, and
-compare **throughput, latency, memory, and accuracy** side by side across
-inference backends.
+**Benchmark is built into Nexis.** Its labelled title-bar launcher opens or
+focuses one dedicated companion window with a responsive setup board, run plan,
+live result matrix, and comparison charts. It is part of the **ML Lab** pack and
+the **AI / ML** and **Everything** presets.
 
-Like the rest of the ecosystem, it's built on **Tauri 2 + React 19 + Vite +
-Tailwind v4**: the Rust side owns the benchmark harness and backend
-abstraction, React owns model management and the charts.
-
-- **Source:** [github.com/rwetz/nexis-benchmark](https://github.com/rwetz/nexis-benchmark)
-- **License:** Apache-2.0
+The historical standalone repository is archived; its Git history now lives in
+the main Nexis repository.
 
 ## Backends
 
-The app has an end-to-end working pipeline. Three backends produce **real**
-measurements; the rest are deterministic simulations behind the same Rust
-`Engine` trait, so more real engines slot in without touching the harness,
-IPC, or UI.
-
-| Backend | State |
+| Backend | What is measured |
 | --- | --- |
-| ONNX Runtime | ✅ Real inference via the `ort` crate (prebuilt binaries, no cmake). |
-| nexis-ml-rs | ✅ Real wgpu/ndarray training throughput — spawns the [`nexis-ml-rs`](/ml-suite/nexis-ml-rs/) engine and reads its NDJSON stream. |
-| llama.cpp | ✅ Real GGUF inference via a prebuilt `llama-bench` (no cmake — it locates the binary). |
-| Simulated | ✅ Synthetic metrics with real event streaming, for UI and protocol testing. |
+| ONNX Runtime | Real CPU inference through the linked `ort` runtime. |
+| llama.cpp | Real GGUF inference through a `llama-bench` binary you locate. |
+| nexis-ml-rs | Real training throughput on a standardized workload. |
+| Simulated | Synthetic metrics for unsupported combinations and UI testing. |
 
-Every result is labeled with its provenance in the UI: a green **`real`** badge
-vs **`sim`**, plus a per-run note — so simulated numbers can never be mistaken
-for measurements.
+Every result carries a **real** or **sim** badge plus a note explaining what was
+actually measured. CPU-only ONNX is intentional; the current build does not
+advertise a GPU execution provider.
 
-## The benchmark protocol
+## Workflow
 
-Each *model × backend* cell runs the same standardized sequence:
+1. Add `.onnx` or `.gguf` model files.
+2. Select compatible backends and configure warm-up/measured runs.
+3. Run the model × backend matrix.
+4. Compare throughput, first-token latency, mean/p50/p95 latency, peak memory,
+   and available accuracy metrics as cells stream in.
 
-1. **Load** the model.
-2. **Warm-up** — a configurable number of discarded runs.
-3. **Measure** — `runs` timed iterations.
+A run persists in the backend if the panel closes or reloads, and reopening the
+window reconnects to the active job rather than starting a second one. Completed
+results can be exported to CSV.
 
-The harness records per-run latency samples and derives **tokens/sec,
-first-token latency, mean / p50 / p95 latency, and peak memory**. Cancellation
-is cooperative — you can stop a running benchmark at any point with
-<kbd>Esc</kbd>.
+## Shortcuts
 
-## Features
-
-- **Model library** — drag-and-drop `.onnx` / `.gguf` files; format and task
-  are detected from the file automatically.
-- **Benchmark config** — set the number of measured runs, warm-up runs, and
-  token counts per protocol.
-- **Results dashboard** — a comparison chart, a live run matrix that fills in
-  as results stream, and **CSV export**.
-- **Browser mode** — run the UI without Tauri (`pnpm dev`); it falls back to an
-  in-process simulator with seeded demo models, which makes UI iteration fast.
-
-## Keyboard shortcuts
+Shortcuts are scoped to the Benchmark surface so they do not steal keystrokes
+from a terminal:
 
 | Key | Action |
 | --- | --- |
-| <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (<kbd>⌘</kbd>+<kbd>Enter</kbd> on macOS) | Run benchmark |
-| <kbd>Esc</kbd> | Stop a running benchmark |
-| <kbd>t</kbd> | Toggle light / dark theme |
+| <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (<kbd>Command</kbd>+<kbd>Enter</kbd> on macOS) | Run |
+| <kbd>Esc</kbd> | Stop the active run |
 
-## Where it fits in the ecosystem
-
-Nexis Benchmark closes the loop on the ecosystem's local-AI story: the
-[Nexis](/basics/what-is-nexis/) terminal *runs* local models (LM Studio, MLX,
-Ollama), the [ML Suite](/ml-suite/) *trains* them, and Benchmark tells you
-**which model and backend is actually fastest on your hardware**. It also
-exercises [`nexis-ml-rs`](/ml-suite/nexis-ml-rs/) directly as one of its real
-measurement engines.
-
-## Develop
-
-```sh
-pnpm install
-pnpm tauri dev     # run the desktop app
-pnpm dev           # browser-only mode with the simulator
-```
+Theme switching belongs to Nexis; the former standalone `t` shortcut no longer
+exists.

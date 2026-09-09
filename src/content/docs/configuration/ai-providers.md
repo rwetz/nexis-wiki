@@ -5,13 +5,13 @@ sidebar:
   order: 4
 ---
 
-Configure AI under **Settings → AI**. Pick a provider, paste a key (or point at a
+Configure AI under **Settings → AI → Models**. Pick a provider, paste a key (or point at a
 local endpoint), and you're set. Keys are stored in the **OS keychain** via
 Rust's `keyring` crate — they never touch disk or `localStorage`.
 
 ## Setting up
 
-1. Open **Settings → AI**.
+1. Open **Settings → AI → Models**.
 2. Choose a provider and paste your API key.
 3. For local / offline models, point Nexis at your LM Studio, MLX, or Ollama URL.
 
@@ -49,5 +49,5 @@ zero telemetry, keys in the keychain.
 ## Security
 
 Nexis wraps AI network access in **SSRF and DNS-rebinding protection**, and the
-AI tool surface is sandboxed. Every file, shell, search, and plan tool requires
-explicit approval before it runs.
+AI tool surface is sandboxed. Tool behavior is controlled under **Settings → AI
+→ Agents** with prompt, deny, allow, and strict read-only auto-approval modes.

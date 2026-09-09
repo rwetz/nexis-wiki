@@ -80,8 +80,9 @@ live ConPTY session, silently killing output in the active terminal.
 
 ## AI tool approval
 
-The agent's capabilities are gated per tool call, defaulting to `prompt` — nothing
-runs without the user seeing it. Full treatment in the
+The agent's capabilities are gated per tool call and default to `prompt`.
+Users can explicitly choose deny, allow, or the shell-only read-safe policy;
+anything the read-safe parser cannot prove harmless falls back to a prompt. Full treatment in the
 [AI pipeline](/architecture/ai-pipeline/#tool-approval).
 
 ## Secrets
@@ -140,7 +141,8 @@ than defaulting to all interfaces, and the viewer cannot send input.
 
 No telemetry, of any kind. Diagnostics export is user-initiated and produces a local
 zip. Private terminals are excluded from AI context and are not serialized into
-session snapshots.
+session snapshots. The optional command ledger is off by default, redacts before
+IPC, excludes private terminals, and has visible retention and deletion controls.
 
 ## Verification
 

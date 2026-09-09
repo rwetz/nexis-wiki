@@ -13,6 +13,7 @@ grouped into a few sections.
 - **Cursor style** — bar, block, or underline, with an optional blink toggle.
 - **Font** — family, size, and letter spacing for the terminal and editor.
 - **Scrollback buffer** size.
+- **Quick Terminal** global shortcut, height, and hide-on-focus-loss behavior.
 
 ## AI
 
@@ -24,6 +25,18 @@ stored in the **OS keychain**, never on disk.
 
 Pick a [theme](/configuration/themes/), set an icon theme, and optionally add a
 background image with adjustable opacity and blur.
+
+## Features
+
+Choose among seven presets or toggle the nine packs individually. Disabling a
+pack hides its tools without uninstalling anything. See [Workbench & feature
+packs](/features/workbench-packs/).
+
+## Privacy
+
+Command recording is off by default. When enabled, the Privacy section shows
+the local ledger's record and output size, controls retention caps, and can
+forget the last 15 minutes, hour, day, or the entire open workspace.
 
 ## Editor
 

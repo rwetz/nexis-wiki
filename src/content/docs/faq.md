@@ -12,7 +12,8 @@ panel in one app. See [What is Nexis?](/basics/what-is-nexis/).
 ## What is it built with?
 
 **Tauri 2**, **Rust**, and **React 19**. The native PTY and heavy lifting are in
-Rust; the UI renders in the system webview, which is why the app is under 10 MB.
+Rust; the UI renders in the system webview. Nexis is designed to stay responsive
+and native, but no longer sacrifices useful capabilities to a fixed size target.
 
 ## Is it free and open source?
 
@@ -39,9 +40,10 @@ above. Full list on [AI providers](/configuration/ai-providers/).
 
 ## Will the AI edit or run things without asking?
 
-No. Every file, shell, search, and plan tool requires **explicit approval**, and
-AI-proposed edits are shown as **per-hunk diffs** you approve or reject
-individually.
+By default, tools prompt before they run. Policies can also deny a tool, allow
+it, or auto-approve only shell commands that pass a strict read-only check.
+AI-proposed edits appear as per-hunk diffs, and agent checkpoints provide a
+one-click Git-backed revert path.
 
 ## What platforms are supported?
 

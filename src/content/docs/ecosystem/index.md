@@ -1,60 +1,56 @@
 ---
 title: The Nexis ecosystem
-description: Nexis is a developer ecosystem — a terminal, ML engines, a benchmark app, a dev dashboard, and a shared design system that tie together.
+description: Nexis is the hub for Atlas, Benchmark, SVG Studio, ML engines, and the public web properties.
 ---
 
-**Nexis is more than one app — it's a developer ecosystem.** The terminal is the
-flagship, but around it has grown a family of tools that share a stack
-(**Tauri 2 + Rust + React 19**), a design language, and a philosophy: local-first,
-lightweight, open source, and zero telemetry.
+**Nexis is the hub.** What began as a family of separate desktop apps has been
+consolidated around one Tauri application, one theme system, and shared state.
+The pieces that need independent runtimes or independent publishing remain
+separate.
 
-## The projects
+## Current shape
 
-| Project | What it is | Stack |
-| --- | --- | --- |
-| [Nexis](/basics/what-is-nexis/) | The AI-native terminal & developer environment (ADE) — the flagship. | Tauri 2 · Rust · React 19 |
-| [nexis-ml](/ml-suite/nexis-ml/) | Python ML engine — train small models on small data, metrics streamed live into Nexis. | Python · PyTorch |
-| [nexis-ml-rs](/ml-suite/nexis-ml-rs/) | Python-free, single-binary ML engine — same protocol and run store as `nexis-ml`, GPU via wgpu, ONNX export. | Rust · burn |
-| [Nexis Benchmark](/ecosystem/nexis-benchmark/) | Desktop app for benchmarking local AI models — ONNX/GGUF across inference backends. | Tauri 2 · Rust · React 19 |
-| [Dev Dashboard](/ecosystem/nexis-dev-dashboard/) | Git status across all your local repos in one glance, scanned natively in ~20 ms. | Tauri 2 · Rust (git2 + rayon) · React 19 |
-| [nexisdev.org](https://nexisdev.org) | The marketing site. | Next.js 16 · shadcn/ui · Tailwind v4 |
-| [This wiki](https://github.com/rwetz/nexis-wiki) | The documentation you're reading, at `wiki.nexisdev.org`. | Astro · Starlight |
+| Project or surface | Current role |
+| --- | --- |
+| [Nexis](/basics/what-is-nexis/) | The AI-native terminal and developer environment. |
+| [Atlas](/ecosystem/nexis-dev-dashboard/) | Built-in repository intelligence, opened in a dedicated Nexis companion window. |
+| [Benchmark](/ecosystem/nexis-benchmark/) | Built-in local-model comparison, opened in a dedicated Nexis companion window. |
+| [ML Lab](/ml-suite/) | A reusable Nexis workbench tab driven by a local engine. |
+| [nexis-ml](/ml-suite/nexis-ml/) | Optional Python/PyTorch training engine. |
+| [nexis-ml-rs](/ml-suite/nexis-ml-rs/) | Default Python-free training engine. |
+| [nexisdev.org](https://nexisdev.org) | The marketing site. |
+| [This wiki](https://github.com/rwetz/nexis-wiki) | User documentation at `wiki.nexisdev.org`. |
 
-## How the pieces fit together
+The former `nexis-atlas`, `nexis-benchmark`, `nexis-imagine`, and
+`nexis-dev-dashboard` repositories are archived historical sources. Their Git
+histories were grafted into Nexis so blame and file history still reach the
+original work.
 
-- **Nexis** is the hub. Its [ML Lab panel](/ml-suite/) spawns an engine —
-  [`nexis-ml`](/ml-suite/nexis-ml/) or [`nexis-ml-rs`](/ml-suite/nexis-ml-rs/) —
-  to do real training work, and renders the streamed metrics live.
-- The two **ML engines** are interchangeable: both speak the same NDJSON
-  protocol and write the same run store, so a run produced by one can be read
-  by the other.
-- **Nexis Benchmark** closes the loop on local AI: it measures the models you'd
-  run *in* Nexis (via LM Studio, Ollama, or ONNX), and it drives `nexis-ml-rs`
-  as one of its real benchmark backends.
-- **Dev Dashboard** answers "which of my repos needs attention?" before you
-  even open a terminal — and can drop you into one (your `$TERMINAL`) at the
-  selected repo.
-- Everything visual descends from the **Nexis design system**: borderless
-  custom window chrome, OKLCH light/dark themes, and the same typography and
-  cursor set. Dev Dashboard is built directly from the design language
-  extracted from Nexis.
+## How the pieces fit
+
+- **Atlas** runs one native libgit2 scan and feeds both a dense repository list
+  and an isometric code map. Opening a repo routes back into the main Nexis
+  workspace or a terminal tab instead of launching another application.
+- **Benchmark** compares model/backend cells with live streaming results. It
+  uses CPU-only ONNX Runtime in-process, a located `llama-bench` for GGUF, the
+  same managed nexis-ml engine as ML Lab, or an explicitly labelled simulator.
+- **ML Lab** and **Benchmark** share engine discovery so they cannot silently
+  measure different nexis-ml binaries.
+- **SVG Studio**, Web Dev tools, System Monitor, Command History, and the other
+  workbenches ship in the main binary and are exposed through feature packs.
 
 ## Shared principles
 
-Every project in the ecosystem follows the same rules — see
-[Philosophy](/basics/philosophy/) for the long version:
-
-- **Local-first.** Your code, your models, your data stay on your machine.
-  AI runs on your own API keys or fully offline.
-- **Lightweight.** Tauri and the system webview instead of Electron; the Nexis
-  terminal itself is under 10 MB.
-- **Zero telemetry.** None of the apps phone home.
-- **Open source.** All repos are public under
-  [github.com/rwetz](https://github.com/rwetz), Apache-2.0 licensed.
+- **Local-first.** Code, models, and project data remain on the machine unless
+  you deliberately use a cloud provider or sharing feature.
+- **Zero telemetry.** Nexis does not collect usage analytics.
+- **Open source.** The repositories are Apache-2.0 licensed.
+- **Useful over tiny.** Tauri and Rust remain the foundation, but a fixed binary
+  size is no longer allowed to exclude a worthwhile native capability.
 
 ## Where to go next
 
-- [Nexis Benchmark](/ecosystem/nexis-benchmark/) — benchmark local AI models.
-- [Dev Dashboard](/ecosystem/nexis-dev-dashboard/) — multi-repo git status at a glance.
-- [ML Suite](/ml-suite/) — the training engines and the ML Lab panel.
-- [What is Nexis?](/basics/what-is-nexis/) — the flagship terminal itself.
+- [Workbench & feature packs](/features/workbench-packs/)
+- [Atlas](/ecosystem/nexis-dev-dashboard/)
+- [Benchmark](/ecosystem/nexis-benchmark/)
+- [ML Suite](/ml-suite/)

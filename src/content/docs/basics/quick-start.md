@@ -17,6 +17,11 @@ details live in the [installation guide](/installation/):
 
 ## 2. Open a project
 
+On first launch, choose a preset. **Standard** is the broad default; **Web Dev**,
+**AI / ML**, and **Art** promote their primary tools into the workbench. A preset
+only selects feature-pack toggles, so you can change the mix later under
+**Settings → Features**.
+
 Launch Nexis and open a folder — **File → Open Folder**, or drag a directory
 onto the window. The file explorer, source control, and terminal all scope to
 that workspace. A terminal tab opens in the project root automatically.
@@ -27,7 +32,7 @@ remember across sessions.
 
 ## 3. Connect AI (or run offline)
 
-Open **Settings → AI**:
+Open **Settings → AI → Models**:
 
 - **Bring your own key** — pick a provider (OpenAI, Anthropic, Google, Groq, and
   [more](/configuration/ai-providers/)) and paste your API key. Keys are stored
@@ -47,6 +52,8 @@ shortcuts](/configuration/keybindings/)).
   approve or reject individually.
 - Stage your changes in **Source Control** and let the AI draft a **Conventional
   Commit** message from the diff.
+- Open **Atlas** from the title bar to scan local repositories, or choose the
+  AI / ML preset to keep **ML Lab** and **Benchmark** close at hand.
 
 ## Where to go next
 

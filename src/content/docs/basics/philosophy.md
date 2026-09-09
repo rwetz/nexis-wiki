@@ -16,19 +16,19 @@ data anywhere.
 If you don't want to use a cloud model at all, you don't have to — Nexis runs
 fully offline against **LM Studio**, **MLX**, or **Ollama**.
 
-## Lightweight by construction
+## Native by construction
 
 Nexis is built on **Tauri 2** rather than Electron. It renders in the system
-webview and does the heavy lifting in Rust, so the whole application ships in
-**under 10 MB** instead of hundreds. Fast to download, fast to launch, light on
-memory.
+webview and does the heavy lifting in Rust. The project no longer treats a tiny
+binary as a hard constraint: useful native capabilities such as bundled
+CPU-only ONNX Runtime take precedence over an arbitrary size target.
 
 ## AI with a seatbelt
 
-The AI is powerful but never unsupervised:
+The AI is powerful but governed by visible policies:
 
-- Every file, shell, search, and plan tool call requires **explicit approval**
-  before it runs.
+- Tool policies are configurable per capability: prompt every time, deny,
+  allow, or auto-approve only shell commands that pass a strict read-only check.
 - AI-proposed edits appear as **per-hunk diffs** — approve or reject each change.
 - The **AI context inspector** shows exactly what is being sent to the model.
 - **Private terminals** are walled off: the AI cannot read their scrollback.

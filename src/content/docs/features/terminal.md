@@ -35,6 +35,10 @@ what's running:
   without auto-executing it.
 - **Inline AI command suggestions** — history-aware completions that **never**
   auto-execute.
+- **Prompt-block navigation** — jump to the previous or next OSC 133 prompt with
+  <kbd>Ctrl+Shift+↑</kbd> / <kbd>Ctrl+Shift+↓</kbd> (Command on macOS).
+- **Command History** — when local recording is enabled, search successful
+  commands from this workspace or search captured output after scrollback is gone.
 
 ## Rendering and interaction
 
@@ -44,6 +48,10 @@ what's running:
 - Configurable font family, font size, letter spacing, and scrollback buffer.
 - Drag files into the terminal to insert them as quoted paths — or as AI context
   attachments.
+- **Inline images** through Sixel and the iTerm2 image protocol, with a bounded
+  per-terminal image budget.
+- **Exit-status gutter** — each completed command gets a success/failure marker;
+  hover for details and click to copy the command block.
 
 ## Private terminals
 
@@ -61,3 +69,10 @@ the assistant. Private terminals are marked with an incognito indicator.
 
 On Windows, WSL is a first-class workspace environment — open a terminal tab
 straight into a distro. See [Windows & WSL](/installation/windows/).
+
+## Quick terminal
+
+Enable **Quick Terminal** under Settings → General to summon a persistent,
+borderless drop-down shell from any application with <kbd>Ctrl+Shift+`</kbd>
+(Command+Shift+` on macOS). It follows the active monitor and can hide on focus
+loss or remain pinned.

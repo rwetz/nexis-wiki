@@ -5,8 +5,8 @@ description: An overview of Nexis — a lightweight, AI-native terminal and deve
 
 **Nexis** is an open-source, lightweight, cross-platform **AI-native terminal and
 developer environment (ADE)**. It combines a fast native terminal, a full code
-editor, a file explorer, source control, and an AI assistant into a single app
-that weighs in at **under 10 MB**, stores your keys in the OS keychain, and ships
+editor, a file explorer, source control, local ML and creative workbenches, and
+an AI assistant into one app. API keys live in the OS keychain, and Nexis ships
 with **zero telemetry**.
 
 It is built on **Tauri 2**, **Rust**, and **React 19**: a native PTY backend in
@@ -27,15 +27,17 @@ in the system webview — which is how the whole app stays so small.
   multi-agent workflows with explicit tool approval. See [AI panel](/features/ai-panel/).
 - **ML Lab** — train small models on your own data with live charts and an
   inference playground. See [ML Suite](/ml-suite/).
+- **Atlas & Benchmark** — focused companion windows for machine-wide repository
+  intelligence and local-model comparison.
+- **Workbench packs** — tune the surface for Standard, Web Dev, Mobile, AI / ML,
+  Art, or Everything workflows. See [Workbench & packs](/features/workbench-packs/).
 
 ## Part of an ecosystem
 
-The terminal is the flagship of a wider **Nexis ecosystem** — a family of
-developer tools sharing the same stack, design system, and local-first,
-zero-telemetry philosophy: the [ML Suite](/ml-suite/) engines,
-[Nexis Benchmark](/ecosystem/nexis-benchmark/) for measuring local AI models,
-and the [Dev Dashboard](/ecosystem/nexis-dev-dashboard/) for multi-repo git
-status. See [The Nexis ecosystem](/ecosystem/) for the full map.
+Nexis is now the hub of a wider ecosystem. [Atlas](/ecosystem/nexis-dev-dashboard/)
+and [Benchmark](/ecosystem/nexis-benchmark/) were absorbed into the main app;
+the [ML Suite](/ml-suite/) engines remain separate local executables that Nexis
+drives through a shared protocol. See [The Nexis ecosystem](/ecosystem/).
 
 ## Who it's for
 

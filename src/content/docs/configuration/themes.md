@@ -11,16 +11,17 @@ For the list of built-ins and a feature overview, see
 
 ## Switching themes
 
-Open **Settings → Appearance** and pick a built-in theme: Nexis Default,
-Catppuccin Mocha, Nord, Tokyo Night, Rosé Pine, Gruvbox, Caffeine, Claude, Sage,
-or Tide. Each includes a matching terminal color palette.
+Open **Settings → Themes** and choose among 17 generated Nexis palettes and five
+credited community palettes. Every built-in has light and dark variants and a
+matching terminal palette. The [appearance overview](/features/themes/) lists
+them all.
 
 ## Authoring a custom theme
 
 A theme is a **`.nexis-theme`** file — a plain, shareable document you can keep
 under version control.
 
-1. In **Settings → Appearance**, create a new theme or import an existing
+1. In **Settings → Themes**, create a new theme or import an existing
    `.nexis-theme`.
 2. Edit colors with the **live swatch preview** to see changes as you go, or
    open the file in the **theme editor** (the code editor) for direct editing.
