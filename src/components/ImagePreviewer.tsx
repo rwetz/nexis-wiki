@@ -28,9 +28,7 @@ export default function ImagePreviewer({ src, alt, caption, width, height }: Pro
 	const [open, setOpen] = useState(false);
 	const [coarse, setCoarse] = useState(false);
 	const closeRef = useRef<HTMLButtonElement>(null);
-	// Tracks where a pointer went down so panning the image doesn't close the
-	// overlay — only a genuine tap (negligible movement) counts as "dismiss".
-	const downAt = useRef<{ x: number; y: number } | null>(null);
+	const triggerRef = useRef<HTMLButtonElement>(null);
 
 	// Touch-primary devices get touch wording and the pan/zoom surface.
 	useEffect(() => {
@@ -45,7 +43,14 @@ export default function ImagePreviewer({ src, alt, caption, width, height }: Pro
 		if (!open) return;
 
 		const onKey = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') setOpen(false);
+			if (e.key === 'Escape') {
+				e.preventDefault();
+				setOpen(false);
+			} else if (e.key === 'Tab') {
+				// Close is the dialog's only focusable control. Keep focus inside it.
+				e.preventDefault();
+				closeRef.current?.focus();
+			}
 		};
 		document.addEventListener('keydown', onKey);
 
@@ -74,6 +79,7 @@ export default function ImagePreviewer({ src, alt, caption, width, height }: Pro
 			body.style.top = prev.top;
 			body.style.width = prev.width;
 			window.scrollTo(0, scrollY);
+			triggerRef.current?.focus();
 		};
 	}, [open]);
 
@@ -82,6 +88,7 @@ export default function ImagePreviewer({ src, alt, caption, width, height }: Pro
 			<figure className="nexis-shot">
 				<button
 					type="button"
+					ref={triggerRef}
 					className="nexis-shot__btn"
 					onClick={() => setOpen(true)}
 					aria-label={`${coarse ? 'Open' : 'Zoom'} image: ${alt}`}
@@ -103,16 +110,7 @@ export default function ImagePreviewer({ src, alt, caption, width, height }: Pro
 					role="dialog"
 					aria-modal="true"
 					aria-label={alt}
-					onPointerDown={(e) => {
-						downAt.current = { x: e.clientX, y: e.clientY };
-					}}
-					onPointerUp={(e) => {
-						const d = downAt.current;
-						downAt.current = null;
-						if (!d) return;
-						const moved = Math.hypot(e.clientX - d.x, e.clientY - d.y);
-						if (moved < 10) setOpen(false);
-					}}
+					onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }}
 				>
 					<button
 						type="button"
@@ -137,8 +135,8 @@ export default function ImagePreviewer({ src, alt, caption, width, height }: Pro
 
 					<span className="nexis-shot__hint">
 						{coarse
-							? 'Drag to pan · pinch to zoom · tap to close'
-							: 'Click anywhere or press Esc to close'}
+							? 'Drag to pan · pinch to zoom · use Close to dismiss'
+							: 'Use Close or press Esc to dismiss'}
 					</span>
 				</div>,
 				document.body,

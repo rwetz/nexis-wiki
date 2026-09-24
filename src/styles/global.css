@@ -89,6 +89,12 @@ h1#_top,
   border-radius: 22%;
 }
 
+/* Keep the entry points visible without requiring a full-screen splash scroll. */
+@media (min-width: 50rem) {
+  .hero { padding-block: 2rem 1rem; }
+  .hero > img { width: min(100%, 11rem); }
+}
+
 /* ------------------------------------------------------------------ */
 /*  Mobile / touch fixes                                               */
 /* ------------------------------------------------------------------ */
@@ -172,4 +178,38 @@ summary,
 .mermaid svg {
   max-width: 100%;
   height: auto;
+}
+
+/* Direct routes to common tasks without adding a client-side island. */
+.docs-quick-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+  margin: 1.4rem 0 2.25rem;
+}
+.docs-quick-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .9rem 1rem;
+  border: 1px solid var(--sl-color-hairline);
+  border-radius: .65rem;
+  color: var(--sl-color-text);
+  background: var(--sl-color-bg-nav);
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.docs-quick-links a:hover,
+.docs-quick-links a:focus-visible {
+  border-color: var(--sl-color-accent);
+  background: var(--sl-color-accent-low);
+}
+.docs-quick-links span { color: var(--sl-color-text-accent); }
+@media (max-width: 38rem) {
+  .docs-quick-links { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .docs-quick-links a { transition: none; }
 }

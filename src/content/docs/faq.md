@@ -22,10 +22,11 @@ open-source [terax-ai](https://github.com/crynta/terax-ai) project.
 
 ## Does Nexis send my data anywhere?
 
-No. There is **zero telemetry**. Your code stays on your machine, and API keys
-are stored in the **OS keychain**, never on disk. If you use a cloud AI provider,
-only what you send to that provider goes to it — and the **AI context inspector**
-shows you exactly what that is.
+Nexis does not include usage telemetry. Code stays local unless you choose to
+send context to a cloud AI provider or use another networked feature. API keys
+are stored through the **OS keychain**, not in Nexis settings files. The keychain
+may persist encrypted data on disk. The **AI context inspector** shows what
+context is sent to a model.
 
 ## Can I use it without any AI provider / API key?
 

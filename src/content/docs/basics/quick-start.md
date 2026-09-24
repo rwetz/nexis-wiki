@@ -36,7 +36,7 @@ Open **Settings → AI → Models**:
 
 - **Bring your own key** — pick a provider (OpenAI, Anthropic, Google, Groq, and
   [more](/configuration/ai-providers/)) and paste your API key. Keys are stored
-  in the **OS keychain** — never on disk.
+  through the **OS keychain**, not in Nexis settings files.
 - **Run offline** — point Nexis at a local **LM Studio**, **MLX**, or **Ollama**
   endpoint. No key required, nothing leaves your machine.
 

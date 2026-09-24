@@ -19,7 +19,7 @@ grouped into a few sections.
 
 Choose your provider and paste an API key, or point Nexis at a local endpoint
 for offline models. See [AI providers](/configuration/ai-providers/). Keys are
-stored in the **OS keychain**, never on disk.
+stored through the **OS keychain**, not in Nexis settings files.
 
 ## Appearance
 

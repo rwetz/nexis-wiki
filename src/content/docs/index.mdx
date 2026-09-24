@@ -3,74 +3,57 @@ title: Nexis — AI-native terminal & dev environment
 description: Documentation for Nexis — the open-source, AI-native terminal and developer environment.
 template: splash
 hero:
-  tagline: The open-source, AI-native terminal & developer environment. Native PTY, editor, LSP/DAP, source control, local ML, creative tools, and an AI agent on your own keys — or fully offline. Zero telemetry.
+  title: Nexis Docs
+  tagline: Install, configure, and get more from the Nexis developer environment.
   image:
     file: ../../assets/nexis-logo.png
   actions:
-    - text: Get started
-      link: /basics/what-is-nexis/
+    - text: Quick start
+      link: /basics/quick-start/
       icon: right-arrow
       variant: primary
     - text: Install Nexis
       link: /installation/
       icon: download
+      variant: secondary
     - text: View on GitHub
       link: https://github.com/rwetz/Nexis
       icon: external
       variant: minimal
-    - text: nexisdev.org
-      link: https://nexisdev.org
-      icon: external
-      variant: minimal
 ---
 
-import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 
 **Last reviewed against Nexis source:** September 9, 2026.
 
-## Welcome
+Find the answer you need and get back to building. Search with <kbd>/</kbd> or
+<kbd>Ctrl</kbd>+<kbd>K</kbd>, or start with a task below.
 
-This is the documentation home for **Nexis** and its local toolchain. Atlas and
-Benchmark now ship inside Nexis as focused companion windows; the ML engines,
-website, wiki, and shared design package remain separate projects. Pick a
-starting point below, or use the search box (<kbd>/</kbd>) to jump to a topic.
+<div class="docs-quick-links" aria-label="Common documentation tasks">
+  <a href="/basics/quick-start/">Start in five minutes <span aria-hidden="true">→</span></a>
+  <a href="/installation/">Choose an installer <span aria-hidden="true">→</span></a>
+  <a href="/configuration/keybindings/">Find a shortcut <span aria-hidden="true">→</span></a>
+  <a href="/troubleshooting/">Fix a problem <span aria-hidden="true">→</span></a>
+</div>
 
-<CardGrid stagger>
-	<Card title="New here?" icon="rocket">
-		Start with [What is Nexis?](/basics/what-is-nexis/) for the tour, then
-		[Quick start](/basics/quick-start/) to get running in a few minutes.
-	</Card>
-	<Card title="Install" icon="download">
-		Grab a build for [Linux](/installation/linux/),
-		[macOS](/installation/macos/), or [Windows & WSL](/installation/windows/).
-	</Card>
-	<Card title="Explore features" icon="puzzle">
-		The [terminal](/features/terminal/), [editor](/features/editor/),
-		[AI panel](/features/ai-panel/), [language tooling](/features/language-tooling/),
-		[git](/features/git/), and [workbench packs](/features/workbench-packs/).
-	</Card>
-	<Card title="Configure it" icon="setting">
-		[Settings](/configuration/settings/), [keyboard shortcuts](/configuration/keybindings/),
-		[themes](/configuration/themes/), and [AI providers](/configuration/ai-providers/).
-	</Card>
-</CardGrid>
+New to the app? Read [What is Nexis?](/basics/what-is-nexis/) before the quick start.
 
-## The ecosystem
-
-Nexis is a **developer ecosystem**, not just one app — see the
-[ecosystem overview](/ecosystem/) for how the pieces fit together.
+## Browse by topic
 
 <CardGrid>
-	<LinkCard
-		title="Nexis"
-		href="/basics/what-is-nexis/"
-		description="The AI-native terminal & developer environment — the flagship. Tauri 2 · Rust · React 19."
-	/>
-	<LinkCard
-		title="ML Suite"
-		href="/ml-suite/"
-		description="Train small models on your own data from the ML Lab panel — a Python engine or a single-binary Rust engine."
-	/>
+	<LinkCard title="Workbench & features" href="/features/workbench-packs/" description="Terminal, editor, AI, feature packs, and tools for your workspace." />
+	<LinkCard title="Configuration" href="/configuration/settings/" description="Settings, themes, providers, and keyboard shortcuts." />
+	<LinkCard title="Architecture" href="/architecture/" description="How the terminal, AI pipeline, and security model fit together." />
+	<LinkCard title="ML Suite" href="/ml-suite/" description="Local model training and the Python and Rust engines." />
+</CardGrid>
+
+## The Nexis ecosystem
+
+Atlas and Benchmark run as companion windows inside Nexis. The ML engines,
+website, wiki, and shared design package are separate projects. The
+[ecosystem overview](/ecosystem/) explains how they fit together.
+
+<CardGrid>
 	<LinkCard
 		title="Benchmark"
 		href="/ecosystem/nexis-benchmark/"
@@ -81,19 +64,7 @@ Nexis is a **developer ecosystem**, not just one app — see the
 		href="/ecosystem/nexis-dev-dashboard/"
 		description="A machine-wide repository list and isometric code map, built into Nexis with one shared scan and selection."
 	/>
-	<LinkCard
-		title="Workbench packs"
-		href="/features/workbench-packs/"
-		description="Seven presets organize core development, Web Dev, AI / ML, and SVG Studio workflows without installing or removing code."
-	/>
-	<LinkCard
-		title="nexisdev.org"
-		href="https://nexisdev.org"
-		description="The marketing site — Next.js 16, shadcn/ui, Tailwind v4."
-	/>
-	<LinkCard
-		title="All repositories"
-		href="https://github.com/rwetz?tab=repositories"
-		description="Every ecosystem project is open source under github.com/rwetz, Apache-2.0 licensed."
-	/>
 </CardGrid>
+
+For downloads and current project status, visit [nexisdev.org](https://nexisdev.org)
+or [browse the repositories](https://github.com/rwetz?tab=repositories).

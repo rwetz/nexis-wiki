@@ -139,7 +139,7 @@ than defaulting to all interfaces, and the viewer cannot send input.
 
 ## Privacy
 
-No telemetry, of any kind. Diagnostics export is user-initiated and produces a local
+Nexis does not include usage telemetry. Diagnostics export is user-initiated and produces a local
 zip. Private terminals are excluded from AI context and are not serialized into
 session snapshots. The optional command ledger is off by default, redacts before
 IPC, excludes private terminals, and has visible retention and deletion controls.

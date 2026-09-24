@@ -22,6 +22,7 @@ export default defineConfig({
 			},
 		}),
 		starlight({
+			disable404Route: true,
 			title: 'Nexis Wiki',
 			description:
 				'Documentation for Nexis — the open-source, AI-native terminal and developer environment.',
@@ -49,6 +50,7 @@ export default defineConfig({
 				SocialIcons: './src/components/SocialIcons.astro',
 			},
 			head: [
+				{ tag: 'meta', attrs: { name: 'referrer', content: 'strict-origin-when-cross-origin' } },
 				{
 					// Applies the persisted sidebar state before first paint, so the
 					// layout doesn't flash expanded-then-collapsed on load.
@@ -68,6 +70,7 @@ export default defineConfig({
 				}),
 			],
 			sidebar: [
+				{ label: 'Documentation home', link: '/' },
 				// Cross-link back to the marketing site (nexisdev.org).
 				{ label: '← Back to nexisdev.org', link: 'https://nexisdev.org' },
 				{
@@ -89,17 +92,19 @@ export default defineConfig({
 				},
 				{
 					label: 'Features',
+					collapsed: true,
 					items: [
-						{ label: 'Workbench & packs', slug: 'features/workbench-packs' },
 						{ autogenerate: { directory: 'features' } },
 					],
 				},
 				{
 					label: 'Configuration',
+					collapsed: true,
 					items: [{ autogenerate: { directory: 'configuration' } }],
 				},
 				{
 					label: 'Architecture',
+					collapsed: true,
 					items: [
 						{ label: 'Overview', slug: 'architecture' },
 						{ label: 'Terminal internals', slug: 'architecture/terminal' },
@@ -109,6 +114,7 @@ export default defineConfig({
 				},
 				{
 					label: 'ML Suite',
+					collapsed: true,
 					items: [
 						{ label: 'Overview', slug: 'ml-suite' },
 						{ label: 'nexis-ml (Python)', slug: 'ml-suite/nexis-ml' },
@@ -117,6 +123,7 @@ export default defineConfig({
 				},
 				{
 					label: 'Ecosystem',
+					collapsed: true,
 					items: [
 						{ label: 'Overview', slug: 'ecosystem' },
 						{ label: 'Benchmark', slug: 'ecosystem/nexis-benchmark' },
@@ -127,9 +134,13 @@ export default defineConfig({
 					label: 'Troubleshooting',
 					items: [{ autogenerate: { directory: 'troubleshooting' } }],
 				},
-				{
-					label: 'Reference',
-					items: [{ label: 'FAQ', slug: 'faq' }],
+			{
+				label: 'Reference',
+				items: [
+					{ label: 'FAQ', slug: 'faq' },
+					{ label: 'Privacy & storage', slug: 'about/privacy' },
+					{ label: 'Accessibility', slug: 'about/accessibility' },
+				],
 				},
 			],
 		}),

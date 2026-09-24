@@ -8,10 +8,10 @@ decisions you'll run into.
 
 ## Local-first and private
 
-Your code and your keys stay on your machine. API keys are written to the **OS
-keychain** via Rust's `keyring` crate — never to disk, never to `localStorage`.
-There is **zero telemetry**: Nexis does not phone home, count you, or ship usage
-data anywhere.
+Your code and your keys stay on your machine unless you choose a networked
+feature. API keys are saved through the **OS keychain** via Rust's `keyring`
+crate, not in Nexis settings or `localStorage`. The OS may persist its keychain
+on disk. Nexis does not include usage telemetry.
 
 If you don't want to use a cloud model at all, you don't have to — Nexis runs
 fully offline against **LM Studio**, **MLX**, or **Ollama**.
