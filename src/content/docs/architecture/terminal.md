@@ -87,7 +87,7 @@ that emits OSC escape sequences.
 | Sequence | Meaning | Used for |
 |---|---|---|
 | OSC 7 | current working directory | tab titles, new-tab cwd inheritance, git panel |
-| OSC 133 A/B/C/D | prompt / command / output / exit code | exit-status gutter, command boundaries, failure detection |
+| OSC 133 A/B/C/D | prompt / command / output / exit code | prompt-to-prompt navigation, busy-terminal close check, command ledger |
 | OSC 0 / 2 | window title | live tab titles |
 | OSC 52 | clipboard | **write-only**, preference-gated |
 
@@ -97,8 +97,11 @@ Two of these are also security boundaries — see
 **When integration is missing.** Not every shell cooperates — an unusual shell, a
 profile that clobbers the injection, a remote session. If no marker arrives within
 about five seconds, Nexis falls back to polling the working directory directly
-(Linux only). That rescues cwd tracking; the exit-status gutter and the failed-command
-"✦ Explain" chip have no fallback.
+(Linux only). That rescues cwd tracking; prompt navigation and the command ledger have no fallback.
+
+Nexis no longer draws per-command decorations (the exit-status gutter and the
+"✦ Explain" chip were removed after they kept reappearing on cleared rows); the
+OSC 133 markers are still parsed for the uses above.
 
 ## The renderer pool
 
