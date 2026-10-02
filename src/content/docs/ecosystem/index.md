@@ -15,11 +15,12 @@ separate.
 | [Nexis](/basics/what-is-nexis/) | The AI-native terminal and developer environment. |
 | [Atlas](/ecosystem/nexis-dev-dashboard/) | Built-in repository intelligence, opened in a dedicated Nexis companion window. |
 | [Benchmark](/ecosystem/nexis-benchmark/) | Built-in local-model comparison, opened in a dedicated Nexis companion window. |
-| [ML Lab](/ml-suite/) | A reusable Nexis workbench tab driven by a local engine. |
+| [ML Lab](/ml-suite/) | A Nexis workbench, opened in its own window and driven by a local engine. |
 | [nexis-ml](/ml-suite/nexis-ml/) | Optional Python/PyTorch training engine. |
 | [nexis-ml-rs](/ml-suite/nexis-ml-rs/) | Default Python-free training engine. |
 | [nexisdev.org](https://nexisdev.org) | The marketing site. |
 | [This wiki](https://github.com/rwetz/nexis-wiki) | User documentation at `wiki.nexisdev.org`. |
+| [nexis-showcase-video](https://github.com/rwetz/nexis-showcase-video) | HyperFrames source for the looping product tour on nexisdev.org, built from real app screenshots. |
 
 The former `nexis-atlas`, `nexis-benchmark`, `nexis-imagine`, and
 `nexis-dev-dashboard` repositories are archived historical sources. Their Git
