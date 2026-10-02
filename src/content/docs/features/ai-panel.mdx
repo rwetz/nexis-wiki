@@ -7,12 +7,13 @@ sidebar:
 
 import { Kbd } from 'starlight-kbd/components';
 import Screenshot from '../../../components/Screenshot.astro';
-import aiShot from '../../../assets/ai.png';
+import aiShot from '../../../assets/ai.webp';
+import orbShot from '../../../assets/orb.webp';
 
 The AI panel is a dockable assistant that shares your workspace context. Toggle
 it any time with <Kbd linux="ctrl+i" mac="cmd+i" windows="ctrl+i" />.
 
-<Screenshot src={aiShot} alt="The Nexis AI panel showing an agentic workflow with edit diffs" caption="The AI panel running an agentic workflow, with proposed edits shown as diffs in the editor." />
+<Screenshot src={aiShot} alt="The Nexis AI panel open over a markdown preview, showing its tool strip and new-chat card" caption="The AI panel: Chat, Queue, Refactor, Templates and Review in one tool strip, with suggested starting points on a new chat." />
 
 ## Providers — or none at all
 
@@ -51,6 +52,8 @@ The new-chat card shows an animated **orb**, and while the agent works the
 **26 styles** under **Settings → AI → Orb**, with a live preview and gallery. Ten
 styles follow the theme's colours (marked with a Theme chip); sixteen keep a
 signature palette.
+
+<Screenshot src={orbShot} alt="Nexis — Settings → AI → Orb" caption="Settings → AI → Orb: a live preview of each state and the gallery of 26 styles." />
 
 ```mermaid
 stateDiagram-v2

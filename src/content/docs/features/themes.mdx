@@ -4,9 +4,14 @@ description: Built-in themes, custom .nexis-theme files, background images, and 
 sidebar:
   order: 6
 ---
+import Screenshot from '../../../components/Screenshot.astro';
+import themesShot from '../../../assets/themes.webp';
+
 
 Nexis is highly themeable — from the editor palette down to the terminal colors
 and the file-explorer icons.
+
+<Screenshot src={themesShot} alt="Nexis — Settings → Themes, listing the built-in palettes and the Lumen import and export buttons" caption="Settings → Themes, listing the built-in palettes and the Lumen import and export buttons." />
 
 ## Built-in themes
 
@@ -51,7 +56,7 @@ visible 2px outline.
 
 ## Lumen palettes and scenes
 
-Nexis exchanges colours with [Lumen](https://github.com/rwetz/lumen), the WebGL
+Nexis exchanges colours with Lumen, the WebGL
 wallpaper generator, through small versioned JSON files. There is no background
 sync; every exchange is a file you choose.
 

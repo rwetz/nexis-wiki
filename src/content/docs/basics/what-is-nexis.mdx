@@ -2,12 +2,17 @@
 title: What is Nexis?
 description: An overview of Nexis — a lightweight, AI-native terminal and developer environment.
 ---
+import Screenshot from '../../../components/Screenshot.astro';
+import welcomeShot from '../../../assets/welcome.webp';
+
 
 **Nexis** is an open-source, lightweight, cross-platform **AI-native terminal and
 developer environment (ADE)**. It combines a fast native terminal, a full code
 editor, a file explorer, source control, local ML and creative workbenches, and
 an AI assistant into one app. API keys live in the OS keychain, and Nexis ships
 with **zero telemetry**.
+
+<Screenshot src={welcomeShot} alt="Nexis — The welcome screen, with its particle wordmark, shown when no tabs are open" caption="The welcome screen, with its particle wordmark, shown when no tabs are open." />
 
 It is built on **Tauri 2**, **Rust**, and **React 19**: a native PTY backend in
 Rust drives multi-tab terminals, while the UI is a modern web front end rendered

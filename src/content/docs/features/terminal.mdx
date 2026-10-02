@@ -4,10 +4,15 @@ description: The Nexis terminal — native PTY, WebGL rendering, split panes, sh
 sidebar:
   order: 1
 ---
+import Screenshot from '../../../components/Screenshot.astro';
+import terminalShot from '../../../assets/terminal.webp';
+
 
 The terminal is the heart of Nexis: a WebGL-rendered [xterm.js](https://xtermjs.org)
 front end driven by a **native PTY backend written in Rust**. It works with
 zsh, bash, pwsh, fish, and cmd.
+
+<Screenshot src={terminalShot} alt="Nexis — Two terminal panes side by side, running git in the Nexis repo" caption="Two terminal panes side by side, running git in the Nexis repo." />
 
 ## Tabs and panes
 
@@ -73,6 +78,6 @@ straight into a distro. See [Windows & WSL](/installation/windows/).
 ## Quick terminal
 
 Enable **Quick Terminal** under Settings → General to summon a persistent,
-borderless drop-down shell from any application with <kbd>Ctrl+Shift+`</kbd>
-(Command+Shift+` on macOS). It follows the active monitor and can hide on focus
+borderless drop-down shell from any application with <kbd>Ctrl+Shift+&#96;</kbd>
+(<kbd>Command+Shift+&#96;</kbd> on macOS). It follows the active monitor and can hide on focus
 loss or remain pinned.

@@ -4,9 +4,17 @@ description: The Nexis code editor — CodeMirror 6, AI autocomplete, diff appro
 sidebar:
   order: 2
 ---
+import Screenshot from '../../../components/Screenshot.astro';
+import editorShot from '../../../assets/editor.webp';
+import spotlightShot from '../../../assets/spotlight.webp';
+import markdownShot from '../../../assets/markdown.webp';
+import documentsEditorShot from '../../../assets/documents-editor.webp';
+
 
 Nexis includes a full code editor built on **CodeMirror 6**, sharing the window
 with your terminal so you can edit and run without switching apps.
+
+<Screenshot src={editorShot} alt="Nexis — A TypeScript file in the editor, with breadcrumbs and the minimap" caption="A TypeScript file in the editor, with breadcrumbs and the minimap." />
 
 ## Languages and syntax
 
@@ -43,6 +51,8 @@ Dockerfile.
 - **Find and replace across the project** — workspace-wide regex search with
   per-file preview and confirmation.
 
+<Screenshot src={spotlightShot} alt="Nexis — Spotlight ranks by subsequence, so mtx finds modules/terminal/index.ts" caption="Spotlight ranks by subsequence, so &quot;mtx&quot; finds modules/terminal/index.ts." />
+
 ## Editing niceties
 
 - **Code minimap** with line-type coloring, click-to-scroll, and a viewport
@@ -65,11 +75,15 @@ Dockerfile.
 - **Jupyter notebook viewer** — right-click any `.ipynb` to open a **static**
   viewer for code, markdown, stream, and error outputs. It does not run cells.
 
+<Screenshot src={markdownShot} alt="Nexis — Markdown preview, with the Edit button that opens the rich editor" caption="Markdown preview, with the Edit button that opens the rich editor." />
+
 ## Documents
 
 The **Documents** pack (Settings → Features → Documents) adds rich-text editing
 for `.md`, `.markdown` and `.docx` files, in its own window with a filterable
 file list and a strip of open documents.
+
+<Screenshot src={documentsEditorShot} alt="Nexis — The Documents window" caption="The Documents window: workspace documents on the left, the rich editor on the right." />
 
 ```mermaid
 flowchart TD

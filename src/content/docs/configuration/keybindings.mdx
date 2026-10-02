@@ -7,9 +7,14 @@ sidebar:
 ---
 
 import { Kbd } from 'starlight-kbd/components';
+import Screenshot from '../../../components/Screenshot.astro';
+import shortcutsShot from '../../../assets/shortcuts.webp';
+import paletteShot from '../../../assets/palette.webp';
 
 These keybindings adapt to your operating system automatically. Use the keyboard
 picker in the top bar to switch between Linux, macOS, and Windows layouts.
+
+<Screenshot src={shortcutsShot} alt="Nexis — The searchable keyboard shortcuts panel" caption="The searchable keyboard shortcuts panel." />
 
 ## Tabs & panes
 
@@ -37,6 +42,8 @@ picker in the top bar to switch between Linux, macOS, and Windows layouts.
 | Command palette | <Kbd linux="ctrl+shift+p" mac="cmd+shift+p" windows="ctrl+shift+p" /> |
 | Previous command prompt | <Kbd linux="ctrl+shift+arrowup" mac="cmd+shift+arrowup" windows="ctrl+shift+arrowup" /> |
 | Next command prompt | <Kbd linux="ctrl+shift+arrowdown" mac="cmd+shift+arrowdown" windows="ctrl+shift+arrowdown" /> |
+
+<Screenshot src={paletteShot} alt="Nexis — The command palette (Ctrl/Cmd+Shift+P)" caption="The command palette (Ctrl/Cmd+Shift+P)." />
 
 ## Editing & code
 

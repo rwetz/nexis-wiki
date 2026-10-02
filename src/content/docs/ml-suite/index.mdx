@@ -2,6 +2,9 @@
 title: ML Suite overview
 description: The Nexis ML Lab and its two interchangeable engines — Python and Rust.
 ---
+import Screenshot from '../../../components/Screenshot.astro';
+import mlLabShot from '../../../assets/ml-lab.webp';
+
 
 The **ML Suite** lets you train small models on your own data, entirely on your
 machine — no cloud, no accounts. It has two halves:
@@ -48,6 +51,8 @@ Rust engine can be read by the Python engine, and vice versa.
   leaving the panel, and export a self-contained HTML report of any run.
 - **Benchmark companion** — compare `.onnx` and `.gguf` models from the same
   AI / ML workbench, with the managed nexis-ml engine resolved consistently.
+
+<Screenshot src={mlLabShot} alt="Nexis — ML Lab in its own window, before the engine is installed" caption="ML Lab in its own window, before the engine is installed." />
 
 ## What it is *not*
 

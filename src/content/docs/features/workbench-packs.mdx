@@ -4,6 +4,14 @@ description: Presets, expansion packs, workbench windows, the bottom panel, and 
 sidebar:
   order: 0
 ---
+import Screenshot from '../../../components/Screenshot.astro';
+import featuresShot from '../../../assets/features.webp';
+import bottomPanelShot from '../../../assets/bottom-panel.webp';
+import atlasShot from '../../../assets/atlas.webp';
+import svgStudioShot from '../../../assets/svg-studio.webp';
+import webToolsShot from '../../../assets/web-tools.webp';
+import documentsShot from '../../../assets/documents.webp';
+
 
 Nexis keeps the terminal, editor, Files, Recent Files, Source Control and AI chat
 available at all times. Everything else is organized into **feature packs**.
@@ -12,6 +20,8 @@ Turning a pack off hides its surfaces; it does not uninstall code.
 ## Presets
 
 Presets are one-click bundles over the same toggles in **Settings → Features**:
+
+<Screenshot src={featuresShot} alt="Nexis — Settings → Features" caption="Settings → Features: presets on top, individual packs below." />
 
 | Preset | Intended surface |
 | --- | --- |
@@ -31,6 +41,8 @@ packs, so changing your configuration also changes the guidance.
 Every built-in view has a *kind*, and the kind decides its home. The sidebar
 rail no longer holds 34 pinnable views; it holds the six you glance at while
 working on a file.
+
+<Screenshot src={bottomPanelShot} alt="Nexis — The bottom panel holds session views; here, System Monitor" caption="The bottom panel holds session views; here, System Monitor." />
 
 ```mermaid
 flowchart LR
@@ -84,6 +96,14 @@ sequenceDiagram
   (JSON, JWT, codecs, regex). Each tool is gated by its own pack.
 - **Documents** (Documents pack) — rich-text editing for Markdown and Word files
   with PDF export. See [Editor → Documents](/features/editor/#documents).
+
+<Screenshot src={atlasShot} alt="Nexis — Atlas" caption="Atlas: every repo it is configured to scan, with branch, changes and a commit heatmap." />
+
+<Screenshot src={svgStudioShot} alt="Nexis — SVG Studio's Backdrop tool generating layered waves" caption="SVG Studio's Backdrop tool generating layered waves." />
+
+<Screenshot src={webToolsShot} alt="Nexis — The Web window's Web Tools formatting JSON" caption="The Web window's Web Tools formatting JSON." />
+
+<Screenshot src={documentsShot} alt="Nexis — The Documents window before a document is opened" caption="The Documents window before a document is opened." />
 
 ## Long-running work
 
