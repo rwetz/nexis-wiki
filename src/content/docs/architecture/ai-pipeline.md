@@ -60,6 +60,31 @@ terminal, todo** — all sharing a context object that owns path resolution.
 Centralizing path resolution is what lets a single place enforce that the agent can't
 wander outside the workspace.
 
+### Custom tools
+
+Workspace-specific tools are scaffolded with `pnpm tool:new <name>` (add
+`--auto` only for read-only tools). Each contribution passes through admission
+in `buildPluginTools`; a bad one is **logged and skipped**, never thrown, so it
+can't disarm the other tools or break a turn.
+
+```mermaid
+flowchart TD
+  C["ToolContribution<br/>name · description · inputSchema · execute"] --> S{"shadows a built-in?<br/>(read_file, bash_run …)"}
+  S -->|yes| X["logged + skipped"]
+  S -->|no| N{"lowercase snake_case,<br/>3–48 chars?"}
+  N -->|no| X
+  N -->|yes| D{"description present?"}
+  D -->|no| X
+  D -->|yes| U{"name already registered?"}
+  U -->|yes| X
+  U -->|no| A["admitted"]
+  A --> P{"approval: auto?"}
+  P -->|no, default| CARD["confirmation card per call"]
+  P -->|yes| RUN["runs without asking"]
+  CARD --> RUN
+  RUN --> R["result — or a thrown error<br/>returned as an error result"]
+```
+
 ## Tool approval
 
 Every tool call passes an approval gate before it executes. Policies are per-tool,

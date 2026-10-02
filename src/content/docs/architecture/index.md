@@ -63,7 +63,8 @@ enumerable list of things the UI can ask for.
 
 ## Multiple windows
 
-The main window is not the only webview. The Settings window and any secondary
+The main window is not the only webview. The Settings window, the workbench
+windows (Atlas, Benchmark, SVG Studio, ML Lab, Web, Documents) and any secondary
 windows are **separate webview processes** with their own JS heap, their own
 Zustand stores, and their own copy of every hydrated preference.
 

@@ -24,7 +24,23 @@ brand-logo fallbacks keep their original colors.
 
 Nexis Default also has an optional rainbow hover accent under **Settings →
 Themes**. It colors eligible icon/text marks and the live AI aurora, not whole
-button surfaces.
+button surfaces. It is deliberately quiet and leaves file-type icons alone,
+since their colours say what kind of file it is.
+
+## Type
+
+The interface is set in **Geist** and code, the terminal and `--font-mono` in
+**Geist Mono**, both as variable fonts so every terminal weight renders
+properly. **Space Grotesk** is used only where Nexis speaks in its own voice:
+dialog titles, empty states, section headers and the welcome wordmark.
+
+## High contrast
+
+**Settings → General → Contrast**: System, Standard or High (or the "Toggle high
+contrast" command). It works on top of any theme: muted text, borders and hover
+surfaces are re-derived from the theme's own colours, so each theme keeps its
+character. Muted text clears WCAG AAA, borders clear 3:1, and focus is always a
+visible 2px outline.
 
 ## Custom themes
 
@@ -32,6 +48,39 @@ button surfaces.
 - A **live swatch preview** shows colors as you pick them.
 - The **theme editor** opens any `.nexis-theme` directly in the code editor, so a
   theme is just a file you can version and share.
+
+## Lumen palettes and scenes
+
+Nexis exchanges colours with [Lumen](https://github.com/rwetz/lumen), the WebGL
+wallpaper generator, through small versioned JSON files. There is no background
+sync; every exchange is a file you choose.
+
+```mermaid
+flowchart LR
+  subgraph N["Nexis · Settings → Themes"]
+    NT["Active theme"]
+    CT["New custom theme<br/>(editable, removable)"]
+    HF["Folder you pick<br/>lumen/&lt;name&gt;.nexis-lumen-scene.json"]
+  end
+  subgraph L["Lumen"]
+    LP["Palette"]
+    LS["Scene: generator · seed · params"]
+  end
+  NT -- "export palette<br/>nexis-lumen-palette v1" --> LP
+  LP -- "export palette" --> CT
+  LS -- "scene snapshot<br/>(palette only is used)" --> CT
+  LS -- "workspace handoff<br/>nexis-lumen-workspace v1" --> HF
+  HF -. "palette" .-> CT
+  HF -. "reopen later" .-> LS
+```
+
+- Importing creates a **new** custom theme (first colour → background, second →
+  accent, text chosen for contrast). Delete the theme to undo the import.
+- A workspace handoff asks you to pick the destination folder and never
+  overwrites an existing scene. A path inside the JSON never authorizes a
+  workspace.
+- Nexis never runs the Lumen scene; animation state, PTYs and credentials never
+  cross the boundary. Unknown format versions are rejected.
 
 ## Backgrounds
 

@@ -34,8 +34,12 @@ Dockerfile.
   instantly.
 - **Breadcrumbs** — file path plus symbol crumbs at the top of the editor.
 - **Symbol outline** — a file-level function/class/variable tree in the sidebar.
-- **Quick file open** (<kbd>Ctrl+P</kbd>) — a fuzzy workspace picker that
-  respects `.gitignore`.
+- **Spotlight** (<kbd>Ctrl/Cmd+P</kbd>, or the title-bar search button) —
+  finds files *and* commands. At rest it is a compact pill of recent files; type
+  and it widens into results plus a live preview (image thumbnails, a small code
+  window, text excerpts, file details). Subsequence ranking means `mtx` finds
+  `modules/terminal/index.ts`. Opening a result uses the explorer's routing, so
+  images open in the image viewer and markdown in its preview.
 - **Find and replace across the project** — workspace-wide regex search with
   per-file preview and confirmation.
 
@@ -56,9 +60,39 @@ Dockerfile.
 
 ## Viewers
 
-- **Markdown preview** — right-click a `.md` file → **Open Preview**.
+- **Markdown preview** — right-click a `.md` file → **Open Preview**. Its
+  **Edit** button opens the rich editor (Documents pack).
 - **Jupyter notebook viewer** — right-click any `.ipynb` to open a **static**
   viewer for code, markdown, stream, and error outputs. It does not run cells.
+
+## Documents
+
+The **Documents** pack (Settings → Features → Documents) adds rich-text editing
+for `.md`, `.markdown` and `.docx` files, in its own window with a filterable
+file list and a strip of open documents.
+
+```mermaid
+flowchart TD
+  O["Open a document"] --> T{"type"}
+  T -->|".md"| MC{"frontmatter, raw HTML,<br/>footnotes or reference links?"}
+  MC -->|yes| RO["Read-only, with a banner"]
+  MC -->|no| ED["Rich editor"]
+  T -->|".docx"| SC["Scan for what a rebuild would lose<br/>headers/footers · comments · tracked changes …"]
+  SC --> IM["Import body via mammoth<br/>schema doubles as sanitizer"]
+  IM --> ED
+  ED --> S["Save"]
+  S -->|markdown| B["Byte-for-byte for plain markdown"]
+  S -->|docx| RB["File is rebuilt, not edited in place"]
+  ED --> PDF["Export PDF<br/>Minimal · Professional · Modern · A4/Letter<br/>rendered locally (WASM)"]
+```
+
+- Plain markdown saves back byte for byte; tables keep their cells.
+- Word files are **rebuilt** on save, so Nexis warns up front about anything the
+  rebuild would drop.
+- PDF export runs locally; linked images are written as alt text and URL rather
+  than fetched.
+- Limitations: document tabs aren't restored after a restart, an open document
+  doesn't reload when the file changes on disk, and PDF export is toolbar-only.
 
 ## Live sync
 

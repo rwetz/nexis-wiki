@@ -1,14 +1,13 @@
 ---
 title: Workbench & feature packs
-description: Presets, expansion packs, Atlas, Benchmark, ML Lab, Web Dev tools, and SVG Studio.
+description: Presets, expansion packs, workbench windows, the bottom panel, and where every surface lives.
 sidebar:
   order: 0
 ---
 
-Nexis keeps the terminal, editor, Files, Recent Files, Source Control, AI chat,
-and Agent Queue available at all times. Everything else is organized into
-**feature packs**. Turning a pack off hides its surfaces; it does not uninstall
-code or erase pinned items.
+Nexis keeps the terminal, editor, Files, Recent Files, Source Control and AI chat
+available at all times. Everything else is organized into **feature packs**.
+Turning a pack off hides its surfaces; it does not uninstall code.
 
 ## Presets
 
@@ -18,38 +17,79 @@ Presets are one-click bundles over the same toggles in **Settings → Features**
 | --- | --- |
 | Bare-Bones | Terminal, editor, files, source control, and AI chat. |
 | Standard | Core plus navigation, build/test/debug, and developer tools. |
-| Web Dev | Standard plus multi-viewport preview, HTTP client, and scratchpad codecs. |
+| Web Dev | Standard plus the Web workbench (Ports, HTTP Client, Web Tools). |
 | Mobile | Standard plus the Mobile pack; its Expo/React Native panels are still planned. |
 | AI / ML | Standard, AI Extras, ML Lab, and Benchmark. |
-| Art | Files, source control, and the SVG workbench without code-reading panels. |
-| Everything | Every currently available pack. |
+| Art | Files, source control, and SVG Studio without code-reading panels. |
+| Everything | Every currently available pack, including Documents. |
 
 The first-run tour and lasting Getting Started checklist derive from the active
 packs, so changing your configuration also changes the guidance.
 
-## Permanent workbench tools
+## Where a surface lives
 
-- **Atlas** and **Benchmark** have labelled title-bar launchers that open or
-  focus one dedicated companion window each. Their state and theme remain in
-  sync with the main app.
-- **ML Lab** appears in the title bar whenever the ML Lab pack is enabled and
-  opens one reusable workbench tab.
-- **SVG Studio** appears when the Art pack is enabled. It combines source and
-  direct canvas editing, shape generators, 27 presets, icon-set review, palette
-  and contrast tools, generative backdrops, favicon export, PNG export, and a
-  SMIL/CSS animation timeline.
+Every built-in view has a *kind*, and the kind decides its home. The sidebar
+rail no longer holds 34 pinnable views; it holds the six you glance at while
+working on a file.
 
-## Pack highlights
+```mermaid
+flowchart LR
+  V["Built-in view"] --> K{"kind"}
+  K -->|contextual| R["Sidebar rail<br/>Files · Source Control · Outline<br/>Symbol Search · Bookmarks · Recent Files"]
+  K -->|session| P["Bottom panel (Ctrl/Cmd+J)<br/>Problems · Build · Tests · Debugger · Activity<br/>REPL · Database · SSH · Command History · System Monitor"]
+  K -->|workbench| W["Own window, title-bar launcher<br/>SVG Studio · ML Lab · Web · Documents<br/>Atlas · Benchmark"]
+  K -->|utility| C["Command palette / Spotlight"]
+```
 
-- **Dev Tools:** Activity, System Monitor, Ports, REPL, Database, Command
-  History, Profiles, SSH, and Atlas.
-- **ML Lab:** local training and experiments plus Benchmark. Benchmark compares
-  ONNX and GGUF models across CPU-only ONNX Runtime, llama.cpp, nexis-ml-rs,
-  and a clearly labelled simulated backend.
-- **Web Dev:** side-by-side device viewports, an SSRF-guarded HTTP client, and
-  local JSON/JWT/codec/regex utilities.
-- **Art:** the full SVG Studio toolchain described above.
-- **Advanced:** sharing, notes, shell/code snippets, and release tooling.
+- **Sidebar rail** — contextual panels for the file in front of you.
+- **Bottom panel** — things you start, watch run and see finish. It toggles with
+  <kbd>Ctrl/Cmd+J</kbd> or the **Panel** button in the status bar.
+- **Workbenches** — places you go and stay.
+
+## Workbench windows
+
+SVG Studio, ML Lab, Web and Documents each open in **their own window**, like
+Atlas and Benchmark. A window can sit on a second screen beside the code.
+
+```mermaid
+sequenceDiagram
+  participant T as Title-bar launcher
+  participant M as Main window
+  participant W as Workbench window
+  T->>W: open (or focus + replay short animation)
+  M-->>W: workspace root at launch
+  M-->>W: root updates when you switch folders
+  W->>M: port preview · SSH session · "Edit raw"
+  Note over M: main window takes the action and comes to the front
+```
+
+- The launchers sit in **one row**; drag one to reorder it. The order is saved
+  (`titlebarToolOrder`), and a launcher whose pack is off keeps its place.
+- A window is capped to 92% × 90% of the monitor's work area when it opens.
+- Opening eases the window in; reduced motion turns this off.
+- Atlas has its own map icon; Web keeps the globe.
+
+## The workbenches
+
+- **Atlas** — an isometric map of your repos, with a 53-week commit-activity
+  heatmap per repo read from local git history.
+- **Benchmark** — compares ONNX and GGUF models across CPU-only ONNX Runtime,
+  llama.cpp, nexis-ml-rs, and a clearly labelled simulated backend.
+- **ML Lab** — local training and experiments. A running job shows an elapsed
+  clock and a stop button.
+- **SVG Studio** (Art pack) — Draw (source, canvas, shapes, 27 presets, preview)
+  plus Palette, Backdrop, Icon Set, Favicon Set and Animator in one tool strip.
+  Presets and shapes *add* to the canvas by default, each in its own slot.
+- **Web** (Web Dev pack) — Ports, an SSRF-guarded HTTP Client, and Web Tools
+  (JSON, JWT, codecs, regex). Each tool is gated by its own pack.
+- **Documents** (Documents pack) — rich-text editing for Markdown and Word files
+  with PDF export. See [Editor → Documents](/features/editor/#documents).
+
+## Long-running work
+
+A shared chip (live dot, name, elapsed clock, stop control) shows running work
+the same way everywhere: the oldest background process in the status bar, ML Lab
+training, and Benchmark sweeps.
 
 ## Command history and privacy
 

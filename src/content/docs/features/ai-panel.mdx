@@ -29,6 +29,10 @@ for the full list and setup. Keys are saved through the **OS keychain**, not in 
 - **Multi-agent and sub-agents** with tool approval flows.
 - **Agent queue** — queue follow-up tasks while an agent runs; they execute in
   order. Stop queued or running tasks from the **Activity** panel.
+- **Tool strip** — the AI window holds **Chat, Queue, Refactor, Templates and
+  Review**. Handing work to the agent is a tab switch in the same window, and
+  Chat stays mounted underneath, so a streaming reply survives a look at the
+  queue.
 - **File, shell, search, and plan tools** — governed by per-tool prompt, deny,
   allow, or read-only auto-approval policies.
 - **Custom TypeScript tools** — scaffold workspace-specific agent capabilities
@@ -39,6 +43,29 @@ for the full list and setup. Keys are saved through the **OS keychain**, not in 
   retrieves the right context.
 - **Voice input** — Whisper transcription via OpenAI.
 - **Auto-compaction** keeps long conversations within the context window.
+
+## The orb
+
+The new-chat card shows an animated **orb**, and while the agent works the
+"Thinking…" spinner becomes a small orb that follows the whole run. Pick one of
+**26 styles** under **Settings → AI → Orb**, with a live preview and gallery. Ten
+styles follow the theme's colours (marked with a Theme chip); sixteen keep a
+signature palette.
+
+```mermaid
+stateDiagram-v2
+  [*] --> Idle: new chat
+  Idle --> Thinking: run starts
+  Thinking --> Thinking: waiting on a tool approval
+  Thinking --> Speaking: answer streams
+  Speaking --> Thinking: next tool call
+  Speaking --> Idle: run ends
+```
+
+States ease into each other rather than switching. Orbs are original WebGL2
+shaders, so they run on every platform Nexis ships on. Without WebGL2 the orb
+falls back to a CSS disc, reduced motion draws one settled frame, and loops stop
+while the window is hidden or the orb is scrolled away.
 
 ## Transparency
 
