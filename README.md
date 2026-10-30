@@ -1,6 +1,20 @@
-# Nexis Wiki
+<p align="center">
+  <img src="public/favicon.svg" width="128" alt="Nexis wiki logo">
+</p>
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+<h1 align="center">Nexis Wiki</h1>
+
+<p align="center">
+  Documentation for the Nexis ecosystem, live at <a href="https://wiki.nexisdev.org">wiki.nexisdev.org</a>.
+</p>
+
+<p align="center">
+  <a href="https://github.com/rwetz/nexis-wiki/actions/workflows/deploy.yml"><img src="https://github.com/rwetz/nexis-wiki/actions/workflows/deploy.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-222B36?labelColor=101319" alt="License"></a>
+  <a href="https://starlight.astro.build"><img src="https://astro.badg.es/v2/built-with-starlight/tiny.svg" alt="Built with Starlight"></a>
+</p>
+
+![The Nexis Docs home page](docs/main.png)
 
 Documentation wiki for the **[Nexis](https://github.com/rwetz/Nexis)** ecosystem:
 the open-source, AI-native terminal & developer environment, plus its two ML
@@ -82,6 +96,13 @@ text is original** and specific to Nexis.
 ## License
 
 [MIT](LICENSE). Article text is original; the stack mirrors the open-source CachyOS wiki.
+
+## Keys
+
+| Keys | |
+|---|---|
+| <kbd>Ctrl</kbd>+<kbd>K</kbd> | Search |
+| <kbd>/</kbd> | Search |
 
 ---
 
