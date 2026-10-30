@@ -82,3 +82,12 @@ text is original** and specific to Nexis.
 ## License
 
 [MIT](LICENSE). Article text is original; the stack mirrors the open-source CachyOS wiki.
+
+---
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/brand/heptagram-white.svg">
+    <img src="docs/brand/heptagram-black.svg" alt="heptagram" width="48">
+  </picture>
+</p>
